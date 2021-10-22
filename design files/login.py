@@ -9,12 +9,15 @@ from PyQt5 import uic
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('login.ui', self)
+        self.initUI()
+
+    def initUI(self):
+        uic.loadUi('../structure files/login.ui', self)
         self.lbl_pic = QLabel(self)
-        self.pixmap = QPixmap('../static/logo1.jpg')
+        self.pixmap = QPixmap('../static/logo.png')
         self.lbl_pic.setPixmap(self.pixmap)
         self.lbl_pic.resize(230, 70)
-        self.lbl_pic.move(110, 40)
+        self.lbl_pic.move(110, 50)
 
 
 def except_hook(cls, exception, traceback):
