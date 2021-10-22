@@ -12,7 +12,7 @@ class MyWidgetLogin(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        uic.loadUi('../structure files/login.ui', self)
+        uic.loadUi('../design files/login.ui', self)
         self.lbl_pic = QLabel(self)
         self.pixmap = QPixmap('../static/logo.png')
         self.lbl_pic.setPixmap(self.pixmap)
