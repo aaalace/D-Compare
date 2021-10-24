@@ -65,7 +65,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Главная страница"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Корзина сравнения"))
         self.btn_clear.setText(_translate("MainWindow", "Очистить все"))
         self.menu_home.setTitle(_translate("MainWindow", "Главная"))
         self.menu_basket.setTitle(_translate("MainWindow", "Корзина сравнения"))
