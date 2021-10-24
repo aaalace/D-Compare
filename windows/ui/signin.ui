@@ -14,7 +14,7 @@
    <string>Регистрация</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #ffe3b3</string>
+   <string notr="true">background-color: #353232</string>
   </property>
   <property name="animated">
    <bool>false</bool>
@@ -70,7 +70,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: white;</string>
+     <string notr="true">background-color: white; color: #FF6600</string>
     </property>
     <property name="text">
      <string>Зарегистрироваться</string>
@@ -91,7 +91,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">color: #FF6600</string>
     </property>
     <property name="text">
      <string>Введите логин</string>
@@ -115,7 +115,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">color: #FF6600</string>
     </property>
     <property name="text">
      <string>Введите пароль</string>
@@ -139,7 +139,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">color: #FF6600</string>
     </property>
     <property name="text">
      <string>Есть аккаунт? - Войди</string>
@@ -158,7 +158,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: white;</string>
+     <string notr="true">background-color: white; color: #FF6600</string>
     </property>
     <property name="text">
      <string>Вход</string>

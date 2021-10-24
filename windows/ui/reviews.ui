@@ -20,7 +20,7 @@
    <string>Главная страница</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #ffe3b3</string>
+   <string notr="true">background-color: #353232</string>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
@@ -47,7 +47,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: orange</string>
+     <string notr="true">color: #FF6600</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
