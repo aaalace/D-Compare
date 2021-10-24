@@ -32,117 +32,38 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="edit_find">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>110</y>
-      <width>1081</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>18</pointsize>
-      <stylestrategy>PreferDefault</stylestrategy>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: white;color: orange</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbl_find">
-    <property name="geometry">
-     <rect>
-      <x>780</x>
-      <y>30</y>
-      <width>331</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>36</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: orange</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="text">
-     <string>Поиск</string>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::AutoText</enum>
-    </property>
-    <property name="scaledContents">
-     <bool>false</bool>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_filter">
-    <property name="geometry">
-     <rect>
-      <x>1500</x>
-      <y>120</y>
-      <width>140</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: orange; color: white; border-radius: 20px</string>
-    </property>
-    <property name="text">
-     <string>Фильтр</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_all">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>120</y>
-      <width>140</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: orange; color: white; border-radius: 20px</string>
-    </property>
-    <property name="text">
-     <string>Все устройства</string>
-    </property>
-   </widget>
    <widget class="QListWidget" name="list_items">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>230</y>
-      <width>1786</width>
-      <height>751</height>
+      <x>55</x>
+      <y>80</y>
+      <width>1781</width>
+      <height>901</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_clear">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>10</y>
+      <width>140</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: orange; color: white; border-radius: 20px</string>
+    </property>
+    <property name="text">
+     <string>Очистить все</string>
     </property>
    </widget>
   </widget>
