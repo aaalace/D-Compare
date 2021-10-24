@@ -105,7 +105,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: orange; color: white; border-radius: 20px</string>
+     <string notr="true">background-color: orange; color: white</string>
     </property>
     <property name="text">
      <string>Фильтр</string>
@@ -126,7 +126,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: orange; color: white; border-radius: 20px</string>
+     <string notr="true">background-color: orange; color: white</string>
     </property>
     <property name="text">
      <string>Все устройства</string>

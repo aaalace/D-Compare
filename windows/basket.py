@@ -35,7 +35,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.btn_clear.setFont(font)
-        self.btn_clear.setStyleSheet("background-color: orange; color: white; border-radius: 20px")
+        self.btn_clear.setStyleSheet("background-color: orange; color: white; ")
         self.btn_clear.setObjectName("btn_clear")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
