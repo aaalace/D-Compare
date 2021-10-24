@@ -48,7 +48,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: white</string>
+     <string notr="true">background-color: white;color: orange</string>
     </property>
     <property name="text">
      <string/>

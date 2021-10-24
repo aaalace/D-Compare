@@ -2,18 +2,16 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5 import uic
-from home import QMainWindow
+from home import Ui_MainWindow
 
 
-class MyWidgetLogin(QMainWindow):
+class MyWidgetLogin(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
         self.initUI()
-        self.
 
     def initUI(self):
-        uic.loadUi('../design files/home.ui', self)
         screen = app.primaryScreen()
         size = screen.size()
         print(size.width(), size.height())
