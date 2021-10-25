@@ -3,8 +3,7 @@
 ### Структура приложения:
 
 ###### каждое из окон - QMainWindow
-###### меню - QMenuBar
-###### элементы меню - QMenu
+###### меню - QTabWidget
 
 ## 1. Вход / Регистрация
 
@@ -17,8 +16,8 @@
   ###### описание приложения справа от полей ввода - QPlainTextEdit
   ###### QPixMap
   
-  ![Screenshot](https://user-images.githubusercontent.com/78506458/138615338-b16a5cf4-a7df-46fe-9352-4a8f76b18461.png)
-  
+  ![Снимок экрана (89)](https://user-images.githubusercontent.com/78506458/138713850-f19fb1ab-2707-488f-952a-1b5185f0ad2a.png)
+
   #### Если пользователь не имеет аккаунта в приложении, то ему необходимо зарегистрироваться, введя имя пользователя и дважды пароль (для подтверждения)
   
   ###### логин - QLineEdit
@@ -29,8 +28,8 @@
   ###### QPixMap
   
   > Над контентом в любом окне (кроме "Вход / Регистрация") должна быть шапка с меню. Меню содержит элементы "Главная", "Корзина сравнения", "Обзоры и рекомендации"
-  
-  ![Screenshot](https://user-images.githubusercontent.com/78506458/138615364-c859fd42-7033-4f68-a75b-e1277c35c6ea.png)
+
+  ![Снимок экрана (87)](https://user-images.githubusercontent.com/78506458/138713881-a3a849cd-d6aa-4899-93db-210c88520394.png)
 
 ## 2. Главная
 
@@ -46,15 +45,16 @@
 
   > Кнопка "характеристики" открывает развернутое модальное окно с характеристиками гаджета
 
-  ![Screenshot](https://user-images.githubusercontent.com/78506458/138615391-9d40be05-e63d-437b-aa0f-29214d2c19ca.png)
+  ![Снимок экрана (86)](https://user-images.githubusercontent.com/78506458/138713941-0167b396-dba2-4314-9140-56c14b9dab0c.png)
 
 ## 2.1 Окно "фильтр"
 
 #### Здесь у пользователя будет возможность задать характеристики требуемые для его гаджета
 
   ###### использованные виджеты: QComboBox, QScrollBar, QLineEdit, QPlainTextEdit, QLabel
+  ###### QIcon
   
-  ![Screenshot](https://user-images.githubusercontent.com/78506458/138615416-dbb8bb1d-17b8-496e-a471-2f81fc0ba8de.png)
+  ![Снимок экрана (90)](https://user-images.githubusercontent.com/78506458/138714001-d34b741a-eab4-4ff6-a031-17140e637121.png)
 
 ## 3. Корзина сравнения
 
@@ -63,7 +63,7 @@
   
   ###### использованные виджеты: QPushButton, QListWidget
    
-  ![Screenshot](https://user-images.githubusercontent.com/78506458/138615438-2666bd38-fa26-4f9e-858e-667dc4b827de.png)
+  ![Снимок экрана (93)](https://user-images.githubusercontent.com/78506458/138714064-152d87d5-0dfb-4df6-a4ad-4fca96f55bee.png)
 
 ## 4. Обзоры и рекомендации
 
@@ -71,4 +71,4 @@
 
   ###### использованные виджеты: QLabel, QListWidget
   
-  ![Screenshot)](https://user-images.githubusercontent.com/78506458/138615445-48a43a93-9d82-4bd0-bea5-b7d753c46212.png)
+  ![Снимок экрана (88)](https://user-images.githubusercontent.com/78506458/138714104-3ad15daa-4044-4059-a701-ab2dad0fa570.png)
