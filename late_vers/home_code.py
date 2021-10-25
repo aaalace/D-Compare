@@ -2,7 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
-from basket import Ui_MainWindow
+from late_vers.home import Ui_MainWindow
 
 
 class MyWidgetLogin(QMainWindow, Ui_MainWindow):
@@ -14,8 +14,8 @@ class MyWidgetLogin(QMainWindow, Ui_MainWindow):
     def initUI(self):
         screen = app.primaryScreen()
         size = screen.size()
-        self.list_items.move(40, 80)
-        self.list_items.resize(size.width() - 80, size.height() - 180)
+        self.list_items.move(30, int(size.height() / 5))
+        self.list_items.resize(int(size.width()) - 60, (int(size.height() / 1.4)))
 
 
 def except_hook(cls, exception, traceback):
