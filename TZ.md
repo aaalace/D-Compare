@@ -17,7 +17,7 @@
   ###### описание приложения справа от полей ввода - QPlainTextEdit
   ###### QPixMap
   
-  ![Снимок экрана (89)](https://user-images.githubusercontent.com/78506458/138616665-fc0619b2-10f2-4836-b15b-70cd5e0d2671.png)
+  ![Снимок экрана (89)](https://user-images.githubusercontent.com/78506458/138713850-f19fb1ab-2707-488f-952a-1b5185f0ad2a.png)
 
   #### Если пользователь не имеет аккаунта в приложении, то ему необходимо зарегистрироваться, введя имя пользователя и дважды пароль (для подтверждения)
   
@@ -29,8 +29,8 @@
   ###### QPixMap
   
   > Над контентом в любом окне (кроме "Вход / Регистрация") должна быть шапка с меню. Меню содержит элементы "Главная", "Корзина сравнения", "Обзоры и рекомендации"
-  
-  ![Снимок экрана (87)](https://user-images.githubusercontent.com/78506458/138616669-a1c5389c-56eb-4e26-a3c7-b70b860933e6.png)
+
+  ![Снимок экрана (87)](https://user-images.githubusercontent.com/78506458/138713881-a3a849cd-d6aa-4899-93db-210c88520394.png)
 
 ## 2. Главная
 
@@ -46,7 +46,7 @@
 
   > Кнопка "характеристики" открывает развернутое модальное окно с характеристиками гаджета
 
-![Снимок экрана (86)](https://user-images.githubusercontent.com/78506458/138616678-6ddd867b-34b0-4c2b-af30-8e21e657f3c6.png)
+  ![Снимок экрана (86)](https://user-images.githubusercontent.com/78506458/138713941-0167b396-dba2-4314-9140-56c14b9dab0c.png)
 
 ## 2.1 Окно "фильтр"
 
@@ -55,7 +55,7 @@
   ###### использованные виджеты: QComboBox, QScrollBar, QLineEdit, QPlainTextEdit, QLabel
   ###### QIcon
   
-  ![Снимок экрана (90)](https://user-images.githubusercontent.com/78506458/138616685-10a955a6-be52-4c6a-9b45-dfd9ce11ce12.png)
+  ![Снимок экрана (90)](https://user-images.githubusercontent.com/78506458/138714001-d34b741a-eab4-4ff6-a031-17140e637121.png)
 
 ## 3. Корзина сравнения
 
@@ -64,7 +64,7 @@
   
   ###### использованные виджеты: QPushButton, QListWidget
    
-![Снимок экрана (93)](https://user-images.githubusercontent.com/78506458/138616691-09c45448-9fcc-493a-bcab-3fa39e8d4023.png)
+  ![Снимок экрана (93)](https://user-images.githubusercontent.com/78506458/138714064-152d87d5-0dfb-4df6-a4ad-4fca96f55bee.png)
 
 ## 4. Обзоры и рекомендации
 
@@ -72,4 +72,4 @@
 
   ###### использованные виджеты: QLabel, QListWidget
   
-  ![Снимок экрана (88)](https://user-images.githubusercontent.com/78506458/138616694-69e9dd13-f52b-400a-82a4-c36f7baebb61.png)
+  ![Снимок экрана (88)](https://user-images.githubusercontent.com/78506458/138714104-3ad15daa-4044-4059-a701-ab2dad0fa570.png)
