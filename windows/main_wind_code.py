@@ -2,7 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
-from main_pyuic import Ui_MainWindow
+from main_wind import Ui_MainWindow
 
 
 class MyWidget(QMainWindow, Ui_MainWindow):
