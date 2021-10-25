@@ -53,6 +53,7 @@
 #### Здесь у пользователя будет возможность задать характеристики требуемые для его гаджета
 
   ###### использованные виджеты: QComboBox, QScrollBar, QLineEdit, QPlainTextEdit, QLabel
+  ###### QIcon
   
   ![Снимок экрана (90)](https://user-images.githubusercontent.com/78506458/138616685-10a955a6-be52-4c6a-9b45-dfd9ce11ce12.png)
 
