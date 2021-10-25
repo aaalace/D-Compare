@@ -701,6 +701,9 @@
     </layout>
    </widget>
    <widget class="QPlainTextEdit" name="text_filters">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -708,6 +711,9 @@
       <width>341</width>
       <height>511</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white</string>
