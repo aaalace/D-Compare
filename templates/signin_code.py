@@ -16,8 +16,8 @@ class MyWidgetSignin(QMainWindow, Ui_MainWindow):
         self.lbl_pic = QLabel(self)
         self.pixmap = QPixmap('../static/logo.png')
         self.lbl_pic.setPixmap(self.pixmap)
-        self.lbl_pic.resize(230, 70)
-        self.lbl_pic.move(110, 50)
+        self.lbl_pic.resize(250, 75)
+        self.lbl_pic.move(280, 55)
 
 
 def except_hook(cls, exception, traceback):
