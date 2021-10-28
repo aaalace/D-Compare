@@ -348,4 +348,4 @@ class Filters_Form(object):
         self.lbl_6.setText(_translate("MainWindow", "фильтр 6"))
         self.label_filtres.setText(_translate("MainWindow", "Примененные фильтры"))
         self.lbl_del.setText(_translate("MainWindow", "Очистить все"))
-        self.label.setText(_translate("MainWindow", "Устроиств соответствующих параметрам: 100"))
+        self.label.setText(_translate("MainWindow", "Устройств соответствующих параметрам: 100"))

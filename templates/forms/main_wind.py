@@ -74,7 +74,6 @@ class Main_Form(object):
         self.list_items_2.setObjectName("list_items_2")
         self.tabWidget.addTab(self.tab_basket, "")
         self.tab_home = QtWidgets.QWidget()
-        self.tab_home.setStyleSheet("")
         self.tab_home.setObjectName("tab_home")
         self.btn_filter = QtWidgets.QPushButton(self.tab_home)
         self.btn_filter.setGeometry(QtCore.QRect(1620, 130, 161, 51))
