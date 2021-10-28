@@ -8,7 +8,7 @@ from templates.forms.login import Login_Form
 from templates.forms.signin import Signin_Form
 from templates.forms.main_wind import Main_Form
 from templates.forms.filters import Filters_Form
-from databases.requests_db import *
+from database.requests_db import *
 
 
 class MyWidgetLogin(QMainWindow, Login_Form):
