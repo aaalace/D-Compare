@@ -1,14 +1,16 @@
 import sys
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import QLabel, QLineEdit, QMessageBox, QPushButton
-from PyQt5.QtCore import QSize
+
 from templates.forms.login import Login_Form
 from templates.forms.signin import Signin_Form
 from templates.forms.main_wind import Main_Form
 from templates.forms.filters import Filters_Form
 from database.requests_db import *
+
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QLabel, QLineEdit, QMessageBox, QPushButton
+from PyQt5.QtCore import QSize
 
 
 class MyWidgetLogin(QMainWindow, Login_Form):
