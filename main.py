@@ -55,7 +55,7 @@ class MyWidgetLogin(QMainWindow, Login_Form):
             self.line_password.clear()
             self.line_login.clear()
 
-    # функция, открывающая главную страницу приложения при успешном входе в систему
+    # функция, открывающая главную страницу приложения при успешном входе пользователя в систему
     def open_main(self):
         form_login.hide()
         form_main.showMaximized()
