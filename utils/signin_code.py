@@ -1,9 +1,7 @@
-import sys
-
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QLabel
+from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QMainWindow
-from signin import Ui_MainWindow
+from templates.forms.signin import Ui_MainWindow
 
 
 class MyWidgetSignin(QMainWindow, Ui_MainWindow):
@@ -19,14 +17,3 @@ class MyWidgetSignin(QMainWindow, Ui_MainWindow):
         self.lbl_pic.resize(250, 75)
         self.lbl_pic.move(280, 55)
 
-
-def except_hook(cls, exception, traceback):
-    sys.__excepthook__(cls, exception, traceback)
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    form = MyWidgetSignin()
-    form.show()
-    sys.excepthook = except_hook
-    sys.exit(app.exec())

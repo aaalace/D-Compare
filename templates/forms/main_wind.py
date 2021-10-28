@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
+class Main_Form(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1917, 1055)
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 0, 1961, 1071))
+        self.tabWidget.setGeometry(QtCore.QRect(0, 0, 1990, 1090))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.tabWidget.setFont(font)

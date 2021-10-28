@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'signin.ui'
+# Form implementation generated from reading ui file 'login.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
+class Login_Form(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 550)
@@ -19,18 +19,24 @@ class Ui_MainWindow(object):
         MainWindow.setAnimated(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.btn_login = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_login.setGeometry(QtCore.QRect(325, 466, 131, 31))
-        self.btn_login.setStyleSheet("color: #FF6600; background-color: #505050")
-        self.btn_login.setObjectName("btn_login")
-        self.lbl_help = QtWidgets.QLabel(self.centralwidget)
-        self.lbl_help.setGeometry(QtCore.QRect(259, 425, 271, 31))
+        self.line_login = QtWidgets.QLineEdit(self.centralwidget)
+        self.line_login.setGeometry(QtCore.QRect(299, 200, 191, 31))
+        self.line_login.setStyleSheet("background-color: #fff")
+        self.line_login.setText("")
+        self.line_login.setDragEnabled(False)
+        self.line_login.setPlaceholderText("")
+        self.line_login.setObjectName("line_login")
+        self.line_password = QtWidgets.QLineEdit(self.centralwidget)
+        self.line_password.setGeometry(QtCore.QRect(299, 290, 191, 31))
+        self.line_password.setStyleSheet("background-color: #fff")
+        self.line_password.setObjectName("line_password")
+        self.btn_entry = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_entry.setGeometry(QtCore.QRect(289, 356, 211, 41))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.lbl_help.setFont(font)
-        self.lbl_help.setStyleSheet("color: #FF6600")
-        self.lbl_help.setAlignment(QtCore.Qt.AlignCenter)
-        self.lbl_help.setObjectName("lbl_help")
+        self.btn_entry.setFont(font)
+        self.btn_entry.setStyleSheet("background-color: #505050; color: #FF6600")
+        self.btn_entry.setObjectName("btn_entry")
         self.lbl_login = QtWidgets.QLabel(self.centralwidget)
         self.lbl_login.setGeometry(QtCore.QRect(295, 156, 201, 31))
         font = QtGui.QFont()
@@ -47,24 +53,18 @@ class Ui_MainWindow(object):
         self.lbl_password.setStyleSheet("color: #FF6600;")
         self.lbl_password.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_password.setObjectName("lbl_password")
-        self.btn_register = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_register.setGeometry(QtCore.QRect(290, 356, 211, 41))
+        self.lbl_help = QtWidgets.QLabel(self.centralwidget)
+        self.lbl_help.setGeometry(QtCore.QRect(259, 425, 271, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.btn_register.setFont(font)
-        self.btn_register.setStyleSheet("background-color: #505050; color: #FF6600")
+        self.lbl_help.setFont(font)
+        self.lbl_help.setStyleSheet("color: #FF6600")
+        self.lbl_help.setAlignment(QtCore.Qt.AlignCenter)
+        self.lbl_help.setObjectName("lbl_help")
+        self.btn_register = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_register.setGeometry(QtCore.QRect(334, 466, 121, 31))
+        self.btn_register.setStyleSheet("color: #FF6600; background-color: #505050")
         self.btn_register.setObjectName("btn_register")
-        self.line_password = QtWidgets.QLineEdit(self.centralwidget)
-        self.line_password.setGeometry(QtCore.QRect(299, 290, 191, 31))
-        self.line_password.setStyleSheet("background-color: #fff")
-        self.line_password.setObjectName("line_password")
-        self.line_login = QtWidgets.QLineEdit(self.centralwidget)
-        self.line_login.setGeometry(QtCore.QRect(299, 200, 191, 31))
-        self.line_login.setStyleSheet("background-color: #fff")
-        self.line_login.setText("")
-        self.line_login.setDragEnabled(False)
-        self.line_login.setPlaceholderText("")
-        self.line_login.setObjectName("line_login")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -72,9 +72,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Регистрация"))
-        self.btn_login.setText(_translate("MainWindow", "Вход"))
-        self.lbl_help.setText(_translate("MainWindow", "Есть аккаунт? - Войди"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Вход"))
+        self.btn_entry.setText(_translate("MainWindow", "Войти"))
         self.lbl_login.setText(_translate("MainWindow", "Логин"))
         self.lbl_password.setText(_translate("MainWindow", "Пароль"))
-        self.btn_register.setText(_translate("MainWindow", "Зарегистрироваться"))
+        self.lbl_help.setText(_translate("MainWindow", "Нет аккаунта? - Зарегистрируйся"))
+        self.btn_register.setText(_translate("MainWindow", "Регистрация"))
