@@ -149,7 +149,7 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
 
     def initUi(self):
         self.btn_clear.setIcon(QIcon('static/trash.png'))
-        self.btn_clear.setIconSize(QSize(27, 27))
+        self.btn_clear.setIconSize(QSize(28, 27))
 
 
 def except_hook(cls, exception, traceback):
