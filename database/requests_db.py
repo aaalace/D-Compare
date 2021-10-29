@@ -22,4 +22,11 @@ def register_new_user(username, password):
         return [False, 'Длина логина и пароля должна быть не меньше 3 символов']
     cur.execute("""INSERT INTO users VALUES(?, ?, ?)""",
                 (len(us) + 1, str(username), str(password))).fetchall()
+    con.commit()
     return [True, 0]
+
+
+def get_gadgets(param):
+    if param == 'all':
+        gadgets = cur.execute("""SELECT * FROM gadgets""").fetchall()
+        return gadgets

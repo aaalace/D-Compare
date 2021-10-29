@@ -6,9 +6,9 @@ from templates.forms.main_wind import Main_Form
 from templates.forms.filters import Filters_Form
 from database.requests_db import *
 
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QWidget, QLayout, QListWidgetItem, QGridLayout
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QColor, QFont
 from PyQt5.QtWidgets import QLabel, QLineEdit, QMessageBox, QPushButton
 from PyQt5.QtCore import QSize
 
@@ -105,6 +105,40 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.setupUi(self)
         self.edit_find.textChanged.connect(lambda: self.edit_find.setText(self.edit_find.text().capitalize()))
         self.btn_filter.clicked.connect(lambda: form_filters.show())
+        self.print_items('all')
+        self.btn_all.clicked.connect(lambda: self.print_items('all'))
+
+    def print_items(self, param):
+        self.list_gadgets.clear()
+        gadgets = get_gadgets(param)
+        for i, el in enumerate(gadgets):
+            # создание виджета
+            item, widget = self.create_item(el, i)
+
+            # добавление виджета в лист
+            self.list_gadgets.addItem(item)
+            self.list_gadgets.setItemWidget(item, widget)
+
+    def create_item(self, el, i):
+        item = QListWidgetItem()
+        widget = QWidget()
+        widget_text = QLabel(f'{str(el[0])} {el[1]}')
+        widget_text.setFont(QFont('Arial', 20))
+        widget_description = QPushButton('Подробнее')
+        widget_description.setStyleSheet('background-color: #FF6600; color: white; height: 35px')
+        widget_button = QPushButton("Добавить в корзину сравнения")
+        widget_button.setStyleSheet('background-color: #FF6600; color: white; height: 50px')
+        widget_price = QLabel(f'Средняя цена на Я.Маркете: {el[-1]}')
+        widget_layout = QGridLayout()
+        widget_layout.addWidget(widget_text)
+        widget_layout.addWidget(widget_price)
+        widget_layout.addWidget(widget_description)
+        widget_layout.addWidget(widget_button)
+        widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
+        widget.setLayout(widget_layout)
+        item.setSizeHint(widget.sizeHint())
+        item.setBackground(QColor(255, 122, 0))
+        return item, widget
 
 
 class MyWidgetFilters(QMainWindow, Filters_Form):
