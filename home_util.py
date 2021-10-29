@@ -23,6 +23,8 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
     def print_items(self, param):
         self.list_gadgets.clear()
+        if param[0] == 'all':
+            self.edit_find.clear()
         gadgets = get_gadgets(param)
         for i, el in enumerate(gadgets):
             # создание виджета
@@ -50,8 +52,8 @@ class MyWidgetMain(QMainWindow, Main_Form):
             pixmap = QPixmap('static/spare.png')
         else:
             pixmap = QPixmap(el[2])
-        pixmap2 = pixmap.scaledToWidth(200)
-        pixmap3 = pixmap2.scaledToHeight(200)
+        pixmap2 = pixmap.scaledToWidth(227)
+        pixmap3 = pixmap2.scaledToHeight(227)
         widget_pic.setPixmap(pixmap3)
         widget_layout = QHBoxLayout()
         widget_layout.addWidget(widget_pic)
@@ -80,7 +82,17 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
         self.setupUi(self)
         self.initUi()
         self.btn_commit.clicked.connect(lambda x: self.close())
+        self.add_filters()
 
     def initUi(self):
         self.btn_clear.setIcon(QIcon('static/trash.png'))
         self.btn_clear.setIconSize(QSize(28, 27))
+
+    def add_filters(self):
+        self.box_producer.addItems(['Все', 'Apple', 'Samsung', 'Xiaomi', 'Poco', 'OnePlus', 'Huawei'])
+        self.box_display_size.addItems(['Все', 'Apple', 'Samsung', 'Xiaomi', 'Poco', 'OnePlus', 'Huawei'])
+        self.box_ghz.addItems(['Все', 'Apple', 'Samsung', 'Xiaomi', 'Poco', 'OnePlus', 'Huawei'])
+        self.box_ram.addItems(['Все', 'Apple', 'Samsung', 'Xiaomi', 'Poco', 'OnePlus', 'Huawei'])
+        self.box_matrix.addItems(['Все', 'Apple', 'Samsung', 'Xiaomi', 'Poco', 'OnePlus', 'Huawei'])
+        self.box_base_camera.addItems(['Все', 'Apple', 'Samsung', 'Xiaomi', 'Poco', 'OnePlus', 'Huawei'])
+        self.box_front_camera.addItems(['Все', 'Apple', 'Samsung', 'Xiaomi', 'Poco', 'OnePlus', 'Huawei'])
