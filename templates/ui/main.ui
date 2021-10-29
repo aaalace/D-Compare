@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1917</width>
+    <width>1899</width>
     <height>1055</height>
    </rect>
   </property>
@@ -44,6 +44,7 @@
     <property name="font">
      <font>
       <pointsize>12</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
      </font>
     </property>
     <property name="cursor">
@@ -51,6 +52,9 @@
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">color: #FF6600; border: 0;</string>
@@ -98,7 +102,7 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #FF6600; color: white</string>
+       <string notr="true">background-color: #FF6600; color: white;  border-radius: 10px</string>
       </property>
       <property name="text">
        <string>Фильтр</string>
@@ -119,7 +123,7 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #FF6600; color: white</string>
+       <string notr="true">background-color: #FF6600; color: white;  border-radius: 10px</string>
       </property>
       <property name="text">
        <string>Все устройства</string>
@@ -172,18 +176,18 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>18</pointsize>
+        <pointsize>16</pointsize>
         <stylestrategy>PreferDefault</stylestrategy>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: white;color: #FF6600</string>
+       <string notr="true">background-color: white;color: #FF6600; border-radius: 20px</string>
       </property>
       <property name="text">
        <string/>
       </property>
      </widget>
-     <widget class="QListWidget" name="list_items">
+     <widget class="QListWidget" name="list_gadgets">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -222,7 +226,7 @@
        <string>Очистить все</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="list_items_2">
+     <widget class="QListWidget" name="list_characts">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -236,7 +240,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="tab_reviews">
      <attribute name="title">
       <string>Обзоры и рекомендации</string>
      </attribute>
@@ -276,7 +280,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QListWidget" name="list_items_3">
+     <widget class="QListWidget" name="list_reviews">
       <property name="geometry">
        <rect>
         <x>60</x>

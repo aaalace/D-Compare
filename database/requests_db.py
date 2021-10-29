@@ -27,6 +27,13 @@ def register_new_user(username, password):
 
 
 def get_gadgets(param):
-    if param == 'all':
+    if param[0] == 'all':
         gadgets = cur.execute("""SELECT * FROM gadgets""").fetchall()
         return gadgets
+    if param[0] == 'search':
+        par = f'%{param[1]}%'
+        gadgets = cur.execute("""SELECT * FROM gadgets
+                                    WHERE name LIKE ?""", (par, )).fetchall()
+        return gadgets
+    if param[0] == 'filter':
+        pass
