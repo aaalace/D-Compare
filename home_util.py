@@ -3,7 +3,7 @@ from templates.forms.filters import Filters_Form
 from templates.forms.info import Ui_Info_Form
 from database.requests_db import *
 
-from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, QHBoxLayout, QButtonGroup
+from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, QHBoxLayout, QButtonGroup, QTableWidgetItem
 from PyQt5.QtWidgets import QLabel, QPushButton
 from PyQt5.QtGui import QFont, QColor, QIcon, QPixmap
 from PyQt5.QtCore import QSize
@@ -41,34 +41,53 @@ class MyWidgetMain(QMainWindow, Main_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setup_basket('', [])
+        self.scroll_bar_style()
+        self.ind_widgets = []
+        self.basket_gadgets = []
+
         self.form_info = WidgetReadMore()
         self.form_filters = MyWidgetFilters()
 
         self.btn_group_readmore = QButtonGroup()
         self.btn_group_readmore.buttonClicked.connect(self.open_read_more)
-        self.scroll_bar_style()
+        self.btn_group_tobasket = QButtonGroup()
+        self.btn_group_tobasket.buttonClicked.connect(self.add_to_basket)
+
         self.edit_find.textChanged.connect(lambda: self.edit_find.setText(self.edit_find.text().capitalize()))
         self.btn_filter.clicked.connect(lambda: self.form_filters.show())
-        self.btn_all.clicked.connect(lambda: self.print_items(['all']))
-        self.edit_find.textChanged.connect(lambda: self.print_items(['search', self.edit_find.text()]))
-        self.print_items(['all'])
+        self.btn_all.clicked.connect(lambda: self.edit_find.clear())
+        self.edit_find.textChanged.connect(lambda: self.print_items_in_gadgets(['search', self.edit_find.text()]))
 
-    def print_items(self, param):
+        self.print_items_in_gadgets(['all'])
+
+    def scroll_bar_style(self):
+        self.list_gadgets.setStyleSheet("""
+                QScrollBar:vertical {              
+                    background-color: #FF6600;
+                    width:20px;
+                }
+            """)
+
+    def print_items_in_gadgets(self, param):
         self.list_gadgets.clear()
-        if param[0] == 'all':
-            self.edit_find.clear()
         self.gadgets = get_gadgets(param)
-        for i, el in enumerate(self.gadgets):
+        if param[-1] == '':
+            self.edit_find.clear()
+        self.ind_widgets.clear()
+        for el in self.gadgets:
             # создание виджета
-            item, widget = self.create_item(el, i)
+            item, widget = self.create_item_in_gadgets(el)
 
             # добавление виджета в лист
             self.list_gadgets.addItem(item)
             self.list_gadgets.setItemWidget(item, widget)
 
-    def create_item(self, el, i):
+    def create_item_in_gadgets(self, el):
         item = QListWidgetItem()
         widget = QWidget()
+
+        self.ind_widgets.append(el[0])
 
         widget_name = QLabel(el[1])
         widget_name.setFont(QFont('Arial', 20))
@@ -79,7 +98,9 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_description.setStyleSheet('background-color: #FF6600; color: white;'
                                          'height: 50px; border-radius: 10px; font-size: 20px')
 
-        widget_button = QPushButton("Добавить в корзину сравнения")
+        widget_button = QPushButton("В корзину сравнения")
+        widget_button.setCheckable(True)
+        self.btn_group_tobasket.addButton(widget_button)
         widget_button.setStyleSheet('background-color: #FF6600; color: white; height: 50px;'
                                     ' border-radius: 10px; font-size: 20px')
 
@@ -107,21 +128,41 @@ class MyWidgetMain(QMainWindow, Main_Form):
         item.setBackground(QColor(255, 122, 0))
         return item, widget
 
-    def scroll_bar_style(self):
-        self.list_gadgets.setStyleSheet("""
-                QScrollBar:vertical {              
-                    background-color: #FF6600;
-                    width:20px;
-                }
-            """)
-
     def open_read_more(self):
         for el in self.gadgets:
-            print(el)
             if self.btn_group_readmore.checkedButton().text()[12:] == el[1]:
                 self.form_info.lbl_info.setText(str(el[-2]))
                 self.form_info.lbl_name.setText(str(el[1]))
                 self.form_info.show()
 
+    def setup_basket(self, name, data):
+        self.head = ['Название', 'Средняя цена', 'Производитель', 'Размер дисплея', 'Частота развертки дисплея',
+                     'Оперативная память', 'Основная камера', 'Фронтальная камера', 'Матрица экрана']
+        self.table_gadgets.setColumnCount(9)
+        self.table_gadgets.setRowCount(5)
+        self.table_gadgets.setHorizontalHeaderLabels(self.head)
+        self.table_gadgets.setVerticalHeaderLabels([name])
+        self.table_gadgets.setColumnWidth(0, 170)
+        self.table_gadgets.setColumnWidth(1, 170)
+        self.table_gadgets.setColumnWidth(2, 170)
+        self.table_gadgets.setColumnWidth(3, 170)
+        self.table_gadgets.setColumnWidth(4, 212)
+        self.table_gadgets.setColumnWidth(5, 170)
+        self.table_gadgets.setColumnWidth(6, 170)
+        self.table_gadgets.setColumnWidth(7, 170)
+        self.table_gadgets.setColumnWidth(8, 170)
+        self.table_gadgets.setColumnWidth(9, 170)
+        self.table_gadgets.setRowCount(len(data))
+        for i, row in enumerate(data):
+            for j, val in enumerate(row):
+                self.table_gadgets.setItem(i, j, QTableWidgetItem(str(val)))
+
+    def add_to_basket(self):
+        ind = self.ind_widgets[list(self.btn_group_tobasket.buttons()).index(self.btn_group_tobasket.checkedButton())]
+        name, data = get_info_for_basket(ind)
+        self.setup_basket(name, data)
+
+    def print_items_in_basket(self):
+        pass
 
 

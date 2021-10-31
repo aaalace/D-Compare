@@ -66,7 +66,7 @@
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -111,7 +111,7 @@
      <widget class="QPushButton" name="btn_all">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>120</x>
         <y>130</y>
         <width>161</width>
         <height>51</height>
@@ -168,9 +168,9 @@
      <widget class="QLineEdit" name="edit_find">
       <property name="geometry">
        <rect>
-        <x>340</x>
+        <x>320</x>
         <y>120</y>
-        <width>1241</width>
+        <width>1261</width>
         <height>71</height>
        </rect>
       </property>
@@ -192,7 +192,7 @@
        <rect>
         <x>60</x>
         <y>220</y>
-        <width>1801</width>
+        <width>1781</width>
         <height>751</height>
        </rect>
       </property>
@@ -226,12 +226,12 @@
        <string>Очистить все</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="list_characts">
+     <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
         <x>60</x>
         <y>120</y>
-        <width>1801</width>
+        <width>1781</width>
         <height>851</height>
        </rect>
       </property>
@@ -285,7 +285,7 @@
        <rect>
         <x>60</x>
         <y>120</y>
-        <width>1801</width>
+        <width>1781</width>
         <height>851</height>
        </rect>
       </property>

@@ -37,3 +37,11 @@ def get_gadgets(param):
         return gadgets
     if param[0] == 'filter':
         pass
+
+
+def get_info_for_basket(ind):
+    data = cur.execute("""SELECT characteristic FROM gadgets WHERE id = ?""",
+                       (ind, )).fetchall()
+    name = cur.execute("""SELECT name FROM gadgets WHERE id = ?""",
+                       (ind, )).fetchall()
+    return name[0][0], [data[0][0].split(';')]
