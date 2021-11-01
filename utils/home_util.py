@@ -74,7 +74,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_description.setStyleSheet('background-color: #FF6600; color: white;'
                                          'height: 50px; border-radius: 10px; font-size: 20px')
 
-        widget_button = QPushButton("В корзину сравнения")
+        widget_button = QPushButton("Добавить в корзину сравнения")
         widget_button.setCheckable(True)
         self.btn_group_tobasket.addButton(widget_button)
         widget_button.setStyleSheet('background-color: #FF6600; color: white; height: 50px;'
@@ -143,6 +143,10 @@ class MyWidgetMain(QMainWindow, Main_Form):
             emsg.setStyleSheet('color: #FF6600')
             emsg.exec()
         else:
+            self.btn_group_tobasket.checkedButton().setStyleSheet('background-color: white; color: #FF6600;'
+                                                                  'height: 50px;'
+                                                                  'border-radius: 10px; font-size: 20px')
+            self.btn_group_tobasket.checkedButton().setText('Добавлено')
             self.setup_basket(name, data)
 
     def print_items_in_basket(self):
@@ -157,5 +161,10 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.basket_data.clear()
         self.table_gadgets.setRowCount(0)
         self.table_gadgets.setColumnCount(0)
+        for el in self.btn_group_tobasket.buttons():
+            el.setStyleSheet('background-color: #FF6600; color: white;'
+                             'height: 50px;'
+                             'border-radius: 10px; font-size: 20px')
+            el.setText('Добавить в корзину сравнения')
 
 
