@@ -1,41 +1,13 @@
 from templates.forms.main_wind import Main_Form
-from templates.forms.filters import Filters_Form
-from templates.forms.info import Ui_Info_Form
+
+from .filters_util import MyWidgetFilters
+from .readmore_util import WidgetReadMore
 from database.requests_db import *
 
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, QHBoxLayout, QButtonGroup, QTableWidgetItem, \
     QMessageBox
 from PyQt5.QtWidgets import QLabel, QPushButton
-from PyQt5.QtGui import QFont, QColor, QIcon, QPixmap
-from PyQt5.QtCore import QSize
-
-
-class MyWidgetFilters(QMainWindow, Filters_Form):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.initUi()
-        self.btn_commit.clicked.connect(lambda x: self.close())
-        self.add_filters()
-
-    def initUi(self):
-        self.btn_clear.setIcon(QIcon('static/trash.png'))
-        self.btn_clear.setIconSize(QSize(28, 27))
-
-    def add_filters(self):
-        self.box_producer.addItems(['Все', 'Apple', 'Samsung', 'Xiaomi', 'Poco', 'OnePlus', 'Huawei'])
-        self.box_display_size.addItems(['Все', '<5', '5 - 5.5', '5.6 - 6', '6.1 - 6.3', '6.4 - 6.6', '>6.6'])
-        self.box_ghz.addItems(['Все', '90 Гц', '120 Гц', '144 Гц'])
-        self.box_ram.addItems(['Все', '<=2 ГБ', '3 ГБ', '4 ГБ', '6 ГБ', '8 ГБ', '>=12 ГБ'])
-        self.box_base_camera.addItems(['Все', '<8 Мп', '8 Мп', '12 - 20 Мп', '21 - 40 Мп', '>40 Мп'])
-        self.box_front_camera.addItems(['Все', '<2 Мп', '3 - 8 Мп', '13', '16', '>16 Мп'])
-        self.box_matrix.addItems(['Все', 'IPS', 'AMOLED', 'Super AMOLED', 'OLED'])
-
-
-class WidgetReadMore(QMainWindow, Ui_Info_Form):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
+from PyQt5.QtGui import QFont, QColor, QPixmap
 
 
 class MyWidgetMain(QMainWindow, Main_Form):
@@ -133,14 +105,16 @@ class MyWidgetMain(QMainWindow, Main_Form):
         return item, widget
 
     def open_read_more(self):
+        self.form_info.hide()
         for el in self.gadgets:
             if self.btn_group_readmore.checkedButton().text()[12:] == el[1]:
-                self.form_info.lbl_info.setText(str(el[-2]))
+                text = '\n\n'.join(str(el[3]).split(';'))
+                self.form_info.lbl_info.setText(text)
                 self.form_info.lbl_name.setText(str(el[1]))
                 self.form_info.show()
 
     def setup_basket(self, name, data):
-        self.head = ['Средняя цена', 'Производитель', 'Размер дисплея', 'Частота развертки дисплея',
+        self.head = ['Средняя цена', 'Производитель', 'Размер дисплея', 'Ёмкость аккумулятора',
                      'Оперативная память', 'Основная камера', 'Фронтальная камера', 'Матрица экрана']
         self.basket_names.append(name)
         self.basket_data.append(data)

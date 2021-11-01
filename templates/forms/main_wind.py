@@ -97,7 +97,7 @@ class Main_Form(object):
         self.table_gadgets = QtWidgets.QTableWidget(self.tab_basket)
         self.table_gadgets.setGeometry(QtCore.QRect(60, 120, 1781, 851))
         self.table_gadgets.setStyleSheet("background-color: white")
-        self.table_gadgets.setObjectName("table_gadgets")
+        self.table_gadgets.setObjectName("tableWidget")
         self.table_gadgets.setColumnCount(0)
         self.table_gadgets.setRowCount(0)
         self.tabWidget.addTab(self.tab_basket, "")
@@ -125,7 +125,7 @@ class Main_Form(object):
         self.action.setObjectName("action")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -139,3 +139,4 @@ class Main_Form(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_basket), _translate("MainWindow", "Корзина сравнения"))
         self.lbl_find_2.setText(_translate("MainWindow", "Обзоры и рекомендации"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_reviews), _translate("MainWindow", "Обзоры и рекомендации"))
+        self.action.setText(_translate("MainWindow", "сц"))

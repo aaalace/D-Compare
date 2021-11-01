@@ -17,9 +17,7 @@ def check_user_in_system(username, password):
 def register_new_user(username, password):
     us = cur.execute("""SELECT * FROM users""").fetchall()
     if not bool(username) or not bool(password):
-        return [False, 'Оба поля должны быть заполнены']
-    elif len(username) < 3 or len(password) < 3:
-        return [False, 'Длина логина и пароля должна быть не меньше 3 символов']
+        return [False, 'Оба поля не должны быть пустыми']
     cur.execute("""INSERT INTO users VALUES(?, ?, ?)""",
                 (len(us) + 1, str(username), str(password))).fetchall()
     con.commit()

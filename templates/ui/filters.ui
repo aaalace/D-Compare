@@ -255,7 +255,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="lbl_ghz">
+      <widget class="QLabel" name="lbl_battery">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
@@ -265,12 +265,12 @@
         <string notr="true">color: #FF6600</string>
        </property>
        <property name="text">
-        <string>Частота развертки дисплея</string>
+        <string>Ёмкость аккумулятора</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="box_ghz">
+      <widget class="QComboBox" name="box_battery">
        <property name="styleSheet">
         <string notr="true">background-color: white</string>
        </property>
