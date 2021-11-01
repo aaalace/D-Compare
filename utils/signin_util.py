@@ -44,5 +44,5 @@ class MyWidgetSignin(QMainWindow, Signin_Form):
         self.hide()
         self.line_password.clear()
         self.line_login.clear()
-        os.system('python utils/login_utils.py')
+        os.system('python utils/login_util.py')
 
