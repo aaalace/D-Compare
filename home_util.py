@@ -140,24 +140,23 @@ class MyWidgetMain(QMainWindow, Main_Form):
                 self.form_info.show()
 
     def setup_basket(self, name, data):
-        self.head = ['Название', 'Средняя цена', 'Производитель', 'Размер дисплея', 'Частота развертки дисплея',
+        self.head = ['Средняя цена', 'Производитель', 'Размер дисплея', 'Частота развертки дисплея',
                      'Оперативная память', 'Основная камера', 'Фронтальная камера', 'Матрица экрана']
         self.basket_names.append(name)
         self.basket_data.append(data)
-        self.table_gadgets.setColumnCount(9)
+        self.table_gadgets.setColumnCount(8)
         self.table_gadgets.setRowCount(5)
         self.table_gadgets.setHorizontalHeaderLabels(self.head)
         self.table_gadgets.setVerticalHeaderLabels(self.basket_names)
-        self.table_gadgets.setColumnWidth(0, 170)
-        self.table_gadgets.setColumnWidth(1, 170)
-        self.table_gadgets.setColumnWidth(2, 170)
-        self.table_gadgets.setColumnWidth(3, 170)
+        self.table_gadgets.setColumnWidth(0, 215)
+        self.table_gadgets.setColumnWidth(1, 215)
+        self.table_gadgets.setColumnWidth(2, 200)
+        self.table_gadgets.setColumnWidth(3, 215)
         self.table_gadgets.setColumnWidth(4, 215)
-        self.table_gadgets.setColumnWidth(5, 170)
-        self.table_gadgets.setColumnWidth(6, 170)
-        self.table_gadgets.setColumnWidth(7, 170)
-        self.table_gadgets.setColumnWidth(8, 170)
-        self.table_gadgets.setColumnWidth(9, 170)
+        self.table_gadgets.setColumnWidth(5, 190)
+        self.table_gadgets.setColumnWidth(6, 190)
+        self.table_gadgets.setColumnWidth(7, 190)
+        self.table_gadgets.setColumnWidth(8, 190)
         self.table_gadgets.setRowCount(len(self.basket_data))
         self.print_items_in_basket()
 
