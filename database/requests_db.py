@@ -44,4 +44,4 @@ def get_info_for_basket(ind):
                        (ind, )).fetchall()
     name = cur.execute("""SELECT name FROM gadgets WHERE id = ?""",
                        (ind, )).fetchall()
-    return name[0][0], [data[0][0].split(';')]
+    return name[0][0], data[0][0].split(';')

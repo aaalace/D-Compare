@@ -3,7 +3,8 @@ from templates.forms.filters import Filters_Form
 from templates.forms.info import Ui_Info_Form
 from database.requests_db import *
 
-from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, QHBoxLayout, QButtonGroup, QTableWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, QHBoxLayout, QButtonGroup, QTableWidgetItem, \
+    QMessageBox
 from PyQt5.QtWidgets import QLabel, QPushButton
 from PyQt5.QtGui import QFont, QColor, QIcon, QPixmap
 from PyQt5.QtCore import QSize
@@ -41,10 +42,12 @@ class MyWidgetMain(QMainWindow, Main_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setup_basket('', [])
-        self.scroll_bar_style()
         self.ind_widgets = []
         self.basket_gadgets = []
+        self.basket_names = []
+        self.basket_data = []
+
+        self.scroll_bar_style()
 
         self.form_info = WidgetReadMore()
         self.form_filters = MyWidgetFilters()
@@ -58,6 +61,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.btn_filter.clicked.connect(lambda: self.form_filters.show())
         self.btn_all.clicked.connect(lambda: self.edit_find.clear())
         self.edit_find.textChanged.connect(lambda: self.print_items_in_gadgets(['search', self.edit_find.text()]))
+        self.btn_clear.clicked.connect(self.clear_everything_in_table)
 
         self.print_items_in_gadgets(['all'])
 
@@ -138,31 +142,47 @@ class MyWidgetMain(QMainWindow, Main_Form):
     def setup_basket(self, name, data):
         self.head = ['Название', 'Средняя цена', 'Производитель', 'Размер дисплея', 'Частота развертки дисплея',
                      'Оперативная память', 'Основная камера', 'Фронтальная камера', 'Матрица экрана']
+        self.basket_names.append(name)
+        self.basket_data.append(data)
         self.table_gadgets.setColumnCount(9)
         self.table_gadgets.setRowCount(5)
         self.table_gadgets.setHorizontalHeaderLabels(self.head)
-        self.table_gadgets.setVerticalHeaderLabels([name])
+        self.table_gadgets.setVerticalHeaderLabels(self.basket_names)
         self.table_gadgets.setColumnWidth(0, 170)
         self.table_gadgets.setColumnWidth(1, 170)
         self.table_gadgets.setColumnWidth(2, 170)
         self.table_gadgets.setColumnWidth(3, 170)
-        self.table_gadgets.setColumnWidth(4, 212)
+        self.table_gadgets.setColumnWidth(4, 215)
         self.table_gadgets.setColumnWidth(5, 170)
         self.table_gadgets.setColumnWidth(6, 170)
         self.table_gadgets.setColumnWidth(7, 170)
         self.table_gadgets.setColumnWidth(8, 170)
         self.table_gadgets.setColumnWidth(9, 170)
-        self.table_gadgets.setRowCount(len(data))
-        for i, row in enumerate(data):
-            for j, val in enumerate(row):
-                self.table_gadgets.setItem(i, j, QTableWidgetItem(str(val)))
+        self.table_gadgets.setRowCount(len(self.basket_data))
+        self.print_items_in_basket()
 
     def add_to_basket(self):
         ind = self.ind_widgets[list(self.btn_group_tobasket.buttons()).index(self.btn_group_tobasket.checkedButton())]
         name, data = get_info_for_basket(ind)
-        self.setup_basket(name, data)
+        if name in self.basket_names:
+            emsg = QMessageBox(self)
+            emsg.setText('Это устройство уже в корзине сравнения')
+            emsg.setStyleSheet('color: #FF6600')
+            emsg.exec()
+        else:
+            self.setup_basket(name, data)
 
     def print_items_in_basket(self):
-        pass
+        for i, row in enumerate(self.basket_data):
+            for j, val in enumerate(row):
+                item = QTableWidgetItem(str(val))
+                self.table_gadgets.setItem(i, j, item)
+
+    def clear_everything_in_table(self):
+        self.table_gadgets.clear()
+        self.basket_names.clear()
+        self.basket_data.clear()
+        self.table_gadgets.setRowCount(0)
+        self.table_gadgets.setColumnCount(0)
 
 
