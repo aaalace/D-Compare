@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication
 
 from templates.forms.login import Login_Form
 from database.requests_db import *
+from utils.CONSTANTS.CONST_login_util import *
 
 from utils.home_util import MyWidgetMain
 from utils.signin_util import MyWidgetSignin
@@ -24,15 +25,15 @@ class MyWidgetLogin(QMainWindow, Login_Form):
 
         # кнопка для быстрого входа в приложение во время разработки проекта, в конце работы над ним она убирается
         self.btn_admin = QPushButton(self)
-        self.btn_admin.move(700, 520)
+        self.btn_admin.move(ADMIN_BTN_MOVE[0], ADMIN_BTN_MOVE[1])
         self.btn_admin.clicked.connect(self.open_main)
 
     def initUI(self):
         self.lbl_pic = QLabel(self)
-        self.pixmap = QPixmap("static/logo.png")
+        self.pixmap = QPixmap(LINK_TO_LOGO)
         self.lbl_pic.setPixmap(self.pixmap)
-        self.lbl_pic.resize(250, 75)
-        self.lbl_pic.move(280, 55)
+        self.lbl_pic.resize(LOGO_IMAGE_SIZE[0], LOGO_IMAGE_SIZE[1])
+        self.lbl_pic.move(LOGO_IMAGE_MOVE[0], LOGO_IMAGE_MOVE[1])
         self.line_password.setEchoMode(QLineEdit.Password)
 
     # функция, обращается к функции в requests_db, проверяет наличие пользователя в системе
@@ -56,10 +57,10 @@ class MyWidgetLogin(QMainWindow, Login_Form):
 
     # окно ошибки, возникающее при неверном вводе данных или отсутствия в системе
     def print_error(self):
-        emsg = QMessageBox(self)
-        emsg.setText('Неверный логин или пароль')
-        emsg.setStyleSheet('color: #FF6600')
-        emsg.exec()
+        error = QMessageBox(self)
+        error.setText(ERROR_TEXT)
+        error.setStyleSheet(ERROR_STYLE)
+        error.exec()
         self.line_password.clear()
         self.line_login.clear()
 
