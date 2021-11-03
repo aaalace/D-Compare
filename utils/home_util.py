@@ -29,22 +29,43 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.btn_group_tobasket.buttonClicked.connect(self.add_to_basket)
 
         self.edit_find.textChanged.connect(lambda: self.edit_find.setText(self.edit_find.text().capitalize()))
+        self.edit_find.textChanged.connect(lambda: self.get_gadgets_by_search(['search', self.edit_find.text()]))
         self.btn_filter.clicked.connect(lambda: self.form_filters.show())
+        self.btn_all.clicked.connect(lambda: self.get_gadgets_by_search(['all', '']))
         self.btn_all.clicked.connect(lambda: self.edit_find.clear())
-        self.edit_find.textChanged.connect(lambda: self.print_items_in_list_gadgets(['search', self.edit_find.text()]))
+        self.btn_all.clicked.connect(lambda: self.form_filters.return_start_params())
         self.btn_clear.clicked.connect(self.clear_everything_in_basket)
+        self.form_filters.btn_commit.clicked.connect(self.get_gadgets_by_params)
 
         self.scroll_bar_style()
-        self.print_items_in_list_gadgets(['all'])
+        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITH_ITEMS_STYLE)
+        self.get_gadgets_by_search(['all'])
 
     def scroll_bar_style(self):
         self.list_gadgets.setStyleSheet(SCROLL_STYLE)
 
-    def print_items_in_list_gadgets(self, param):
+    def get_gadgets_by_params(self):
+        self.form_filters.close()
+        self.list_gadgets.clear()
+        price = [self.form_filters.line_from.text(), self.form_filters.line_to.text()]
+        producer = self.form_filters.box_producer.currentText()
+        display_size = self.form_filters.box_display_size.currentText()
+        battery = self.form_filters.box_battery.currentText()
+        ram = self.form_filters.box_ram.currentText()
+        base_camera = self.form_filters.box_base_camera.currentText()
+        front_camera = self.form_filters.box_front_camera.currentText()
+        matrix = self.form_filters.box_matrix.currentText()
+        self.gadgets = get_gadgets(['filter', [price, producer, display_size, battery, ram,
+                               base_camera, front_camera, matrix]])
+        self.print_items_in_list_gadgets()
+
+    def get_gadgets_by_search(self, param):
+        print(param)
         self.list_gadgets.clear()
         self.gadgets = get_gadgets(param)
-        if param[-1] == '':
-            self.edit_find.clear()
+        self.print_items_in_list_gadgets()
+
+    def print_items_in_list_gadgets(self):
         self.ind_widgets.clear()
         for el in self.gadgets:
             # создание виджета

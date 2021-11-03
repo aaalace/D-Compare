@@ -1,5 +1,4 @@
 from templates.forms.filters import Filters_Form
-from database.requests_db import *
 from utils.CONSTANTS.CONST_filters_util import *
 
 from PyQt5.QtWidgets import QMainWindow
@@ -12,12 +11,14 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
         super().__init__()
         self.setupUi(self)
         self.initUi()
-        self.btn_commit.clicked.connect(lambda x: self.close())
         self.add_filters()
+        self.btn_clear.clicked.connect(self.return_start_params)
 
     def initUi(self):
         self.btn_clear.setIcon(QIcon('../static/trash.png'))
         self.btn_clear.setIconSize(QSize(28, 27))
+        self.line_from.setText('0')
+        self.line_to.setText('150000')
 
     def add_filters(self):
         self.box_producer.addItems(PRODUCER_PARAMS)
@@ -27,3 +28,14 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
         self.box_base_camera.addItems(BASE_CAMERA_PARAMS)
         self.box_front_camera.addItems(FRONT_CAMERA_PARAMS)
         self.box_matrix.addItems(MATRIX_PARAMS)
+
+    def return_start_params(self):
+        self.line_from.setText('0')
+        self.line_to.setText('150000')
+        self.box_producer.setCurrentText('Все')
+        self.box_ram.setCurrentText('Все')
+        self.box_matrix.setCurrentText('Все')
+        self.box_battery.setCurrentText('Все')
+        self.box_base_camera.setCurrentText('Все')
+        self.box_front_camera.setCurrentText('Все')
+        self.box_display_size.setCurrentText('Все')
