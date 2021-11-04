@@ -1,9 +1,3 @@
-WIDGET_INDEX = []
-GADGETS_IN_BASKET = []
-NAMES_IN_BASKET = []
-DATA_IN_BASKET = []
-
-
 SCROLL_STYLE = '''QScrollBar:vertical {              
                   background-color: #FF6600;
                   width:20px;
@@ -51,4 +45,5 @@ WIDGET_NAME_FONT = ('Arial', 20)
 WIDGET_PRICE_FONT = ('Arial', 12)
 
 SPARE_PIC_LINK = 'static/spare.png'
+
 

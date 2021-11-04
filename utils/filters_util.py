@@ -29,6 +29,7 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
         self.box_front_camera.currentTextChanged.connect(self.change_used_filters)
         self.box_display_size.currentTextChanged.connect(self.change_used_filters)
 
+    # вспомогательная функция для добавления параметров в QComboBox виджеты
     def add_filters(self):
         self.box_producer.addItems(PRODUCER_PARAMS)
         self.box_display_size.addItems(DISPLAY_SIZE_PARAMS)
@@ -38,6 +39,7 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
         self.box_front_camera.addItems(FRONT_CAMERA_PARAMS)
         self.box_matrix.addItems(MATRIX_PARAMS)
 
+    # функция возврата начальных параметров в фильтрах
     def return_start_params(self):
         self.line_from.setText(INITIAL_MIN_VALUE)
         self.line_to.setText(INITIAL_MAX_VALUE)
@@ -50,6 +52,7 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
         self.box_display_size.setCurrentText(INITIAL_START_PARAM)
         self.change_used_filters()
 
+    # функция меняющая информацию в "примененных фильтрах"
     def change_used_filters(self):
         self.text_filters.clear()
         self.text_filters.setStyleSheet('color: white; font-size: 15px')
@@ -63,6 +66,7 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
         self.text_filters.appendPlainText(f'Матрица:\n{self.box_matrix.currentText()}\n')
         self.gadgets_count()
 
+    # функция для подсчета количества существующих по выбранным фильтрам гаджетов и выводом в "примененных фильтрах"
     def gadgets_count(self):
         price = [self.line_from.text(), self.line_to.text()]
         producer = self.box_producer.currentText()

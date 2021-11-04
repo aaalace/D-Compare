@@ -14,17 +14,14 @@ class MyWidgetSignin(QMainWindow, Signin_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.initUI()
-        self.btn_login.clicked.connect(self.open_login)
-        self.btn_register.clicked.connect(self.register)
-        self.line_password.setEchoMode(QLineEdit.Password)
-
-    def initUI(self):
         self.lbl_pic = QLabel(self)
         self.pixmap = QPixmap(LINK_TO_LOGO)
         self.lbl_pic.setPixmap(self.pixmap)
         self.lbl_pic.resize(LOGO_IMAGE_SIZE[0], LOGO_IMAGE_SIZE[1])
         self.lbl_pic.move(LOGO_IMAGE_MOVE[0], LOGO_IMAGE_MOVE[1])
+        self.btn_login.clicked.connect(self.open_login)
+        self.btn_register.clicked.connect(self.register)
+        self.line_password.setEchoMode(QLineEdit.Password)
 
     # функция, обращается к функции в requests_db, регистрирует нового пользователя в системе
     def register(self):

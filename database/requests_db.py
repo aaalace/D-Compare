@@ -4,7 +4,7 @@ con = sqlite3.connect("database/main_db.sqlite")
 cur = con.cursor()
 
 
-# проверка на наличие данного пользователя в БД
+# функция отвечающая за проверку на наличие данного пользователя в БД
 def check_user_in_system(username, password):
     global user, pas
     if username == 0 and password == 0:
@@ -18,6 +18,7 @@ def check_user_in_system(username, password):
     return True
 
 
+# функция отвечающая за изменение пароля
 def update_password(new, username):
     print(new)
     if bool(new):
@@ -41,6 +42,7 @@ def register_new_user(username, password):
     return [True, 0]
 
 
+# функция отвечающая за получение определенного набора гаджетов для главной страницы
 def get_gadgets(param):
     if param[0] == 'all':
         gadgets = cur.execute("""SELECT * FROM gadgets""").fetchall()
@@ -137,9 +139,24 @@ def get_gadgets(param):
         return gadgets
 
 
+# функция отвечающая за сбор информации об устройстве из базы данных
 def get_info_for_basket(ind):
     data = cur.execute("""SELECT characteristic FROM gadgets WHERE id = ?""",
                        (ind, )).fetchall()
     name = cur.execute("""SELECT name FROM gadgets WHERE id = ?""",
                        (ind, )).fetchall()
     return name[0][0], data[0][0].split(';')
+
+
+# функция отвечающая за сбор обзоров из базы данных
+def get_reviews_by_button(index):
+    info = cur.execute("""SELECT info FROM reviews WHERE id = ?""",
+                       (index,)).fetchall()
+    review = cur.execute("""SELECT name FROM reviews WHERE id = ?""",
+                       (index,)).fetchall()
+    return review[0][0], info[0][0].split(';')
+
+
+def get_reviews():
+    reviews = cur.execute("""SELECT * FROM reviews""").fetchall()
+    return reviews

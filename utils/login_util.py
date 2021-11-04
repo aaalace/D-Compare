@@ -17,19 +17,16 @@ class MyWidgetLogin(QMainWindow, Login_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.initUI()
-        self.sign_in = MyWidgetSignin()
-
-        self.btn_register.clicked.connect(self.open_register)
-        self.btn_entry.clicked.connect(self.check_login)
-
-    def initUI(self):
         self.lbl_pic = QLabel(self)
         self.pixmap = QPixmap(LINK_TO_LOGO)
         self.lbl_pic.setPixmap(self.pixmap)
         self.lbl_pic.resize(LOGO_IMAGE_SIZE[0], LOGO_IMAGE_SIZE[1])
         self.lbl_pic.move(LOGO_IMAGE_MOVE[0], LOGO_IMAGE_MOVE[1])
         self.line_password.setEchoMode(QLineEdit.Password)
+        self.sign_in = MyWidgetSignin()
+
+        self.btn_register.clicked.connect(self.open_register)
+        self.btn_entry.clicked.connect(self.check_login)
 
     # функция, обращается к функции в requests_db, проверяет наличие пользователя в системе
     def check_login(self):
