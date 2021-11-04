@@ -23,11 +23,6 @@ class MyWidgetLogin(QMainWindow, Login_Form):
         self.btn_register.clicked.connect(self.open_register)
         self.btn_entry.clicked.connect(self.check_login)
 
-        # кнопка для быстрого входа в приложение во время разработки проекта, в конце работы над ним она убирается
-        self.btn_admin = QPushButton(self)
-        self.btn_admin.move(ADMIN_BTN_MOVE[0], ADMIN_BTN_MOVE[1])
-        self.btn_admin.clicked.connect(self.open_main)
-
     def initUI(self):
         self.lbl_pic = QLabel(self)
         self.pixmap = QPixmap(LINK_TO_LOGO)

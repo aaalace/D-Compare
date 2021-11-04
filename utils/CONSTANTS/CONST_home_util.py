@@ -45,3 +45,10 @@ ERROR_TEXT = 'Это устройство уже в корзине сравне�
 ERROR_STYLE = 'color: #FF6600'
 
 IMAGE_SIZE = 227
+
+WIDGET_NAME_FONT = ('Arial', 20)
+
+WIDGET_PRICE_FONT = ('Arial', 12)
+
+SPARE_PIC_LINK = 'static/spare.png'
+

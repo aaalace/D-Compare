@@ -6,7 +6,7 @@ from database.requests_db import *
 from utils.CONSTANTS.CONST_home_util import *
 
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, \
-    QHBoxLayout, QButtonGroup, QTableWidgetItem, QMessageBox
+    QHBoxLayout, QButtonGroup, QTableWidgetItem, QMessageBox, QLineEdit
 from PyQt5.QtWidgets import QLabel, QPushButton
 from PyQt5.QtGui import QFont, QColor, QPixmap
 
@@ -30,19 +30,26 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
         self.edit_find.textChanged.connect(lambda: self.edit_find.setText(self.edit_find.text().capitalize()))
         self.edit_find.textChanged.connect(lambda: self.get_gadgets_by_search(['search', self.edit_find.text()]))
-        self.btn_filter.clicked.connect(lambda: self.form_filters.show())
+        self.btn_filter.clicked.connect(lambda: self.show_filters())
         self.btn_all.clicked.connect(lambda: self.get_gadgets_by_search(['all', '']))
         self.btn_all.clicked.connect(lambda: self.edit_find.clear())
         self.btn_all.clicked.connect(lambda: self.form_filters.return_start_params())
         self.btn_clear.clicked.connect(self.clear_everything_in_basket)
         self.form_filters.btn_commit.clicked.connect(self.get_gadgets_by_params)
+        self.radio_update.clicked.connect(self.change_pass_echo)
+        self.btn_update.clicked.connect(self.change_password)
 
         self.scroll_bar_style()
         self.table_gadgets.setStyleSheet(TABLE_BASKET_WITH_ITEMS_STYLE)
         self.get_gadgets_by_search(['all'])
+        self.get_username_password()
 
     def scroll_bar_style(self):
         self.list_gadgets.setStyleSheet(SCROLL_STYLE)
+
+    def show_filters(self):
+        self.form_filters.hide()
+        self.form_filters.show()
 
     def get_gadgets_by_params(self):
         self.form_filters.close()
@@ -60,7 +67,6 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.print_items_in_list_gadgets()
 
     def get_gadgets_by_search(self, param):
-        print(param)
         self.list_gadgets.clear()
         self.gadgets = get_gadgets(param)
         self.print_items_in_list_gadgets()
@@ -82,7 +88,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.ind_widgets.append(el[0])
 
         widget_name = QLabel(el[1])
-        widget_name.setFont(QFont('Arial', 20))
+        widget_name.setFont(QFont(WIDGET_NAME_FONT[0], WIDGET_NAME_FONT[1]))
 
         btn_description = QPushButton(f'Подробнее o {el[1]}')
         btn_description.setCheckable(True)
@@ -95,11 +101,11 @@ class MyWidgetMain(QMainWindow, Main_Form):
         btn_add.setStyleSheet(BTN_ADD_STYLE)
 
         widget_price = QLabel(f'Средняя цена на Яндекс.Маркете: {el[-1]}')
-        widget_price.setFont(QFont('Arial', 12))
+        widget_price.setFont(QFont(WIDGET_PRICE_FONT[0], WIDGET_PRICE_FONT[1]))
 
         widget_pic = QLabel(self)
         if not bool(el[2]):
-            pixmap = QPixmap('static/spare.png')
+            pixmap = QPixmap(SPARE_PIC_LINK)
         else:
             pixmap = QPixmap(el[2])
         pixmap2 = pixmap.scaledToWidth(IMAGE_SIZE)
@@ -178,4 +184,17 @@ class MyWidgetMain(QMainWindow, Main_Form):
             el.setStyleSheet(BTN_ADD_STYLE)
             el.setText(BTN_ADD_TEXT)
 
+    def get_username_password(self):
+        user, pas = check_user_in_system(0, 0)
+        self.line_login.setText(user)
+        self.line_password.setText(pas)
+        self.line_password.setEchoMode(QLineEdit.Password)
 
+    def change_pass_echo(self):
+        if self.radio_update.isChecked():
+            self.line_password.setEchoMode(QLineEdit.Normal)
+        else:
+            self.line_password.setEchoMode(QLineEdit.Password)
+
+    def change_password(self):
+        self.line_password.setText(update_password(self.line_new.text(), self.line_login.text()))

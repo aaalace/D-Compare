@@ -6,11 +6,28 @@ cur = con.cursor()
 
 # проверка на наличие данного пользователя в БД
 def check_user_in_system(username, password):
+    global user, pas
+    if username == 0 and password == 0:
+        return user, pas
     data = cur.execute("""SELECT id FROM users WHERE username = ? AND password = ?""",
                        (str(username), str(password))).fetchall()
+    user = username
+    pas = password
     if len(data) == 0:
         return False
     return True
+
+
+def update_password(new, username):
+    print(new)
+    if bool(new):
+        cur.execute("""UPDATE users
+                        SET password = ?
+                        WHERE username = ?""", (new, username)).fetchall()
+        con.commit()
+        return new
+    else:
+        return 'ОШИБКА'
 
 
 # добавление нового пользователя в БД с проверкой на условия данных
@@ -26,7 +43,6 @@ def register_new_user(username, password):
 
 def get_gadgets(param):
     if param[0] == 'all':
-        print('allllll')
         gadgets = cur.execute("""SELECT * FROM gadgets""").fetchall()
         return gadgets
     if param[0] == 'search':
