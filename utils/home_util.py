@@ -137,7 +137,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
         widget.setLayout(widget_layout)
         item.setSizeHint(widget.sizeHint())
-        item.setBackground(QColor(255, 122, 0))
+        item.setBackground(QColor(ORANGE[0], ORANGE[1], ORANGE[2]))
         return item, widget
 
     # функция для открытия окна по нажатию кнопки "Подробнее"
@@ -254,7 +254,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_name_review = QLabel(el[1])
         widget_name_review.setFont(QFont(WIDGET_NAME_FONT[0], WIDGET_NAME_FONT[1]))
 
-        btn_more = QPushButton(f'Читать больше')
+        btn_more = QPushButton(REVIEW_BUTTON_TEXT)
         btn_more.setCheckable(True)
         self.btn_group_reviews.addButton(btn_more)
         btn_more.setStyleSheet(BTN_DESC_STYLE)
@@ -265,7 +265,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
         widget.setLayout(widget_layout)
         item.setSizeHint(widget.sizeHint())
-        item.setBackground(QColor(255, 122, 0))
+        item.setBackground(QColor(ORANGE[0], ORANGE[1], ORANGE[2]))
         return item, widget
 
     def open_more_about_review(self):

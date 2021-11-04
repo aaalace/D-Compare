@@ -25,6 +25,8 @@ BTN_DESC_STYLE = 'background-color: #FF6600;' \
                  'border-radius: 10px;' \
                  'font-size: 20px'
 
+ORANGE = 255, 122, 0
+
 TABLE_BASKET_HEADER = ['Средняя цена', 'Производитель', 'Размер дисплея', 'Ёмкость аккумулятора',
                        'Оперативная память', 'Основная камера', 'Фронтальная камера', 'Матрица экрана']
 
@@ -46,4 +48,5 @@ WIDGET_PRICE_FONT = ('Arial', 12)
 
 SPARE_PIC_LINK = 'static/spare.png'
 
+REVIEW_BUTTON_TEXT = 'Читать больше'
 
