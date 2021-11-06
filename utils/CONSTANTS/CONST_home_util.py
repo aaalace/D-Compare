@@ -23,7 +23,8 @@ BTN_DESC_STYLE = 'background-color: #FF6600;' \
                  'color: white;' \
                  'height: 50px;' \
                  'border-radius: 10px;' \
-                 'font-size: 20px'
+                 'font-size: 20px;' \
+                 'width: 300px'
 
 ORANGE = 255, 122, 0
 
@@ -39,6 +40,8 @@ TABLE_BASKET_COLUMN_WIDTH = 202
 ERROR_TEXT = 'Это устройство уже в корзине сравнения'
 
 ERROR_STYLE = 'color: #FF6600'
+
+REVIEW_STYLE = 'background-color: #353232'
 
 IMAGE_SIZE = 227
 

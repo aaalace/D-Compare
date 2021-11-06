@@ -155,10 +155,32 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.form_info.hide()
         for el in self.gadgets:
             if self.btn_group_readmore.checkedButton().text()[12:] == el[1]:
-                text = '\n\n'.join(str(el[3]).split(';'))
+                data = el[3].split(';')
+                data = self.convert_characteristics(data)
+                text = '\n\n'.join(data)
                 self.form_info.lbl_info.setText(text)
                 self.form_info.lbl_name.setText(str(el[1]))
                 self.form_info.show()
+
+    def convert_characteristics(self, data):
+        for i, el in enumerate(data):
+            if i == 0:
+                data[i] = f'Средняя цена устройства на Яндекс.Маркете - {el}'
+            if i == 1:
+                data[i] = f'Производитель: - {el}'
+            if i == 2:
+                data[i] = f'Размер экрана - {el}"'
+            if i == 3:
+                data[i] = f'Ёмкость аккумулятора - {el} мАч'
+            if i == 4:
+                data[i] = f'Оперативная память: - {el} ГБ'
+            if i == 5:
+                data[i] = f'Основная камера - {el} Мп'
+            if i == 6:
+                data[i] = f'Фронтальная камера: - {el} Мп'
+            if i == 7:
+                data[i] = f'Тип матрицы - {el}'
+        return data
 
     # функции отвечающие за корзину сравнения:
 
@@ -258,6 +280,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
             item, widget = self.create_item_in_list_reviews(el)
 
             # добавление виджета в лист
+            self.list_reviews.setStyleSheet(REVIEW_STYLE)
             self.list_reviews.addItem(item)
             self.list_reviews.setItemWidget(item, widget)
 
@@ -280,14 +303,18 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_layout.addWidget(widget_name_review)
         widget_layout.addWidget(btn_more)
         widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
+        widget_layout.addStretch()
+        widget_layout.setSpacing(40)
         widget.setLayout(widget_layout)
+        widget.setStyleSheet(REVIEW_STYLE)
         item.setSizeHint(widget.sizeHint())
         item.setBackground(QColor(ORANGE[0], ORANGE[1], ORANGE[2]))
         return item, widget
 
     def open_more_about_review(self):
+        self.form_review.hide()
         index = self.ind_reviews[list(self.btn_group_reviews.buttons()).index(self.btn_group_reviews.checkedButton())]
         review, info = get_reviews_by_button(index)
-        self.form_review.lbl_info.setText(info[0])
+        self.form_review.text_data.setPlainText(info[0])
         self.form_review.lbl_name.setText(review)
-        self.form_review.show()
+        self.form_review.showMaximized()

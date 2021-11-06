@@ -1,4 +1,4 @@
-from templates.forms.info import Ui_Info_Form
+from templates.forms.review import Ui_Info_Form
 from PyQt5.QtWidgets import QMainWindow
 
 
