@@ -20,7 +20,6 @@ def check_user_in_system(username, password):
 
 # функция отвечающая за изменение пароля
 def update_password(new, username):
-    print(new)
     if bool(new):
         cur.execute("""UPDATE users
                         SET password = ?

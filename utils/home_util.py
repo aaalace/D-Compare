@@ -1,3 +1,7 @@
+from PIL.ImageQt import ImageQt
+from PIL import Image
+
+
 from templates.forms.main_wind import Main_Form
 
 from .filters_util import MyWidgetFilters
@@ -121,12 +125,18 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
         widget_pic = QLabel(self)
         if not bool(el[2]):
-            pixmap = QPixmap(SPARE_PIC_LINK)
+            img = Image.open(SPARE_PIC_LINK)
+            img2 = img.resize((200, 200))
+            qim = ImageQt(img2)
+            pixmap = QPixmap.fromImage(qim)
         else:
-            pixmap = QPixmap(el[2])
-        pixmap2 = pixmap.scaledToWidth(IMAGE_SIZE)
-        pixmap3 = pixmap2.scaledToHeight(IMAGE_SIZE)
-        widget_pic.setPixmap(pixmap3)
+            img = Image.open(el[2])
+            img2 = img.resize((200, 200))
+            qim = ImageQt(img2)
+            pixmap = QPixmap.fromImage(qim)
+        pixmap = pixmap.scaledToWidth(IMAGE_SIZE)
+        pixmap = pixmap.scaledToHeight(IMAGE_SIZE)
+        widget_pic.setPixmap(pixmap)
 
         widget_layout = QHBoxLayout()
         widget_layout.addWidget(widget_pic)
