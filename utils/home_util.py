@@ -7,7 +7,7 @@ from templates.forms.main_wind import Main_Form
 from .filters_util import MyWidgetFilters
 from .readmore_util import WidgetReadMore
 from .reviewmore_util import WidgetReviewMore
-from database.requests_db import *
+from requests_db import *
 from utils.CONSTANTS.CONST_home_util import *
 
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, \
@@ -258,9 +258,9 @@ class MyWidgetMain(QMainWindow, Main_Form):
     # функция для изменения пароля
     def change_password(self):
         dialog = QInputDialog()
-        dialog.setStyleSheet('color: #FF6600; background-color: #353232; width: 130px')
-        text, ok = dialog.getText(dialog, 'Изменение пароля',
-                                          'Введите новый пароль:')
+        dialog.setStyleSheet(DIALOG_STYLE)
+        text, ok = dialog.getText(dialog, DIALOG_TITLE,
+                                          DIALOG_TEXT)
 
         if ok:
             updated_password = update_password(text, self.line_login.text())

@@ -1,7 +1,5 @@
-import os
-
 from templates.forms.signin import Signin_Form
-from database.requests_db import *
+from requests_db import *
 from utils.CONSTANTS.CONST_signin_util import *
 
 
@@ -42,5 +40,3 @@ class MyWidgetSignin(QMainWindow, Signin_Form):
         self.hide()
         self.line_password.clear()
         self.line_login.clear()
-        os.system(OS_FILE)
-

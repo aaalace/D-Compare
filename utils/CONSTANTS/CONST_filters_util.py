@@ -8,3 +8,4 @@ INITIAL_MAX_VALUE = '150000'
 
 INITIAL_START_PARAM = 'Все'
 
+FILTERS_USED_STYLE = 'color: white; font-size: 15px'

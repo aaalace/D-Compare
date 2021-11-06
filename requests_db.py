@@ -1,6 +1,6 @@
 import sqlite3
 
-con = sqlite3.connect("database/main_db.sqlite")
+con = sqlite3.connect("main_db.sqlite")
 cur = con.cursor()
 
 
@@ -50,7 +50,7 @@ def get_gadgets(param):
         param = param[1]
         par = f'%{param}%'
         gadgets = cur.execute("""SELECT * FROM gadgets
-                                    WHERE name LIKE ?""", (par, )).fetchall()
+                                    WHERE name LIKE ?""", (par,)).fetchall()
         return gadgets
     if param[0] == 'filter':
         characteristics = cur.execute("""SELECT id, characteristic FROM gadgets""").fetchall()
@@ -133,7 +133,7 @@ def get_gadgets(param):
 
         gadgets = []
         for el in indexes:
-            gadget = cur.execute("""SELECT * FROM gadgets WHERE id = ?""", (el, )).fetchall()
+            gadget = cur.execute("""SELECT * FROM gadgets WHERE id = ?""", (el,)).fetchall()
             gadgets.append(gadget[0])
         return gadgets
 
@@ -141,9 +141,9 @@ def get_gadgets(param):
 # функция отвечающая за сбор информации об устройстве из базы данных
 def get_info_for_basket(ind):
     data = cur.execute("""SELECT characteristic FROM gadgets WHERE id = ?""",
-                       (ind, )).fetchall()
+                       (ind,)).fetchall()
     name = cur.execute("""SELECT name FROM gadgets WHERE id = ?""",
-                       (ind, )).fetchall()
+                       (ind,)).fetchall()
     return name[0][0], data[0][0].split(';')
 
 
@@ -152,7 +152,7 @@ def get_reviews_by_button(index):
     info = cur.execute("""SELECT info FROM reviews WHERE id = ?""",
                        (index,)).fetchall()
     review = cur.execute("""SELECT name FROM reviews WHERE id = ?""",
-                       (index,)).fetchall()
+                         (index,)).fetchall()
     return review[0][0], info[0][0].split(';')
 
 

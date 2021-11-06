@@ -53,3 +53,8 @@ SPARE_PIC_LINK = 'static/spare.png'
 
 REVIEW_BUTTON_TEXT = 'Читать больше'
 
+DIALOG_STYLE = 'color: #FF6600; background-color: #353232; width: 130px'
+
+DIALOG_TITLE = 'Изменение пароля'
+
+DIALOG_TEXT = 'Введите новый пароль:'

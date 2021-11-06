@@ -1,7 +1,7 @@
 from templates.forms.filters import Filters_Form
 
 from utils.CONSTANTS.CONST_filters_util import *
-from database.requests_db import *
+from requests_db import *
 
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QIcon
@@ -31,15 +31,15 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
 
     # вспомогательная функция для добавления параметров в QComboBox виджеты
     def add_filters(self):
-        filters = open('utils/additional_files/filters.txt', encoding='utf-8')
-        line = [line.rstrip() for line in filters]
-        self.box_producer.addItems(line[0].split(';'))
-        self.box_display_size.addItems(line[1].split(';'))
-        self.box_battery.addItems(line[2].split(';'))
-        self.box_ram.addItems(line[3].split(';'))
-        self.box_base_camera.addItems(line[4].split(';'))
-        self.box_front_camera.addItems(line[5].split(';'))
-        self.box_matrix.addItems(line[6].split(';'))
+        file = open('additional_files/filters.txt', encoding='utf-8')
+        lines = [line.rstrip() for line in file]
+        self.box_producer.addItems(lines[0].split(';'))
+        self.box_display_size.addItems(lines[1].split(';'))
+        self.box_battery.addItems(lines[2].split(';'))
+        self.box_ram.addItems(lines[3].split(';'))
+        self.box_base_camera.addItems(lines[4].split(';'))
+        self.box_front_camera.addItems(lines[5].split(';'))
+        self.box_matrix.addItems(lines[6].split(';'))
 
     # функция возврата начальных параметров в фильтрах
     def return_start_params(self):
@@ -57,7 +57,7 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
     # функция меняющая информацию в "примененных фильтрах"
     def change_used_filters(self):
         self.text_filters.clear()
-        self.text_filters.setStyleSheet('color: white; font-size: 15px')
+        self.text_filters.setStyleSheet(FILTERS_USED_STYLE)
         self.text_filters.appendPlainText(f'Цена:\n{self.line_from.text()} руб. - {self.line_to.text()} руб.\n')
         self.text_filters.appendPlainText(f'Производитель:\n{self.box_producer.currentText()}\n')
         self.text_filters.appendPlainText(f'Размер дисплея:\n{self.box_display_size.currentText()}\n')
