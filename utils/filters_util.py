@@ -31,13 +31,15 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
 
     # вспомогательная функция для добавления параметров в QComboBox виджеты
     def add_filters(self):
-        self.box_producer.addItems(PRODUCER_PARAMS)
-        self.box_display_size.addItems(DISPLAY_SIZE_PARAMS)
-        self.box_battery.addItems(BATTERY_PARAMS)
-        self.box_ram.addItems(RAM_PARAMS)
-        self.box_base_camera.addItems(BASE_CAMERA_PARAMS)
-        self.box_front_camera.addItems(FRONT_CAMERA_PARAMS)
-        self.box_matrix.addItems(MATRIX_PARAMS)
+        filters = open('utils/additional_files/filters.txt', encoding='utf-8')
+        line = [line.rstrip() for line in filters]
+        self.box_producer.addItems(line[0].split(';'))
+        self.box_display_size.addItems(line[1].split(';'))
+        self.box_battery.addItems(line[2].split(';'))
+        self.box_ram.addItems(line[3].split(';'))
+        self.box_base_camera.addItems(line[4].split(';'))
+        self.box_front_camera.addItems(line[5].split(';'))
+        self.box_matrix.addItems(line[6].split(';'))
 
     # функция возврата начальных параметров в фильтрах
     def return_start_params(self):

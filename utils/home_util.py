@@ -7,7 +7,7 @@ from database.requests_db import *
 from utils.CONSTANTS.CONST_home_util import *
 
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, \
-    QHBoxLayout, QButtonGroup, QTableWidgetItem, QMessageBox, QLineEdit
+    QHBoxLayout, QButtonGroup, QTableWidgetItem, QMessageBox, QLineEdit, QInputDialog
 from PyQt5.QtWidgets import QLabel, QPushButton
 from PyQt5.QtGui import QFont, QColor, QPixmap
 
@@ -225,7 +225,14 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
     # функция для изменения пароля
     def change_password(self):
-        self.line_password.setText(update_password(self.line_new.text(), self.line_login.text()))
+        dialog = QInputDialog()
+        dialog.setStyleSheet('color: #FF6600; background-color: #353232; width: 130px')
+        text, ok = dialog.getText(dialog, 'Изменение пароля',
+                                          'Введите новый пароль:')
+
+        if ok:
+            updated_password = update_password(text, self.line_login.text())
+            self.line_password.setText(updated_password)
 
     # функции отвечающие за страницу обзоры и рекомендации:
 
