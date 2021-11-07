@@ -28,12 +28,12 @@ BTN_DESC_STYLE = 'background-color: #FF6600;' \
                  'font-size: 20px;' \
                  'width: 100px;'
 
-BTN_READ_MORE = 'background-color: #FF6600;' \
+BTN_READ_MORE = 'background-color: #353232;' \
                  'color: white;' \
                  'height: 50px;' \
                  'border-radius: 10px;' \
                  'font-size: 20px;' \
-                 'width: 200px;'
+                 'width: 1020px;'
 
 
 ORANGE = 255, 122, 0
@@ -41,11 +41,15 @@ ORANGE = 255, 122, 0
 TABLE_BASKET_HEADER = ['Средняя цена', 'Производитель', 'Размер дисплея', 'Ёмкость аккумулятора',
                        'Оперативная память', 'Основная камера', 'Фронтальная камера', 'Матрица экрана']
 
-TABLE_BASKET_WITH_ITEMS_STYLE = '''background-color: #353232;'''
+TABLE_BASKET_WITH_ITEMS_STYLE = '''background-color: white'''
 
-TABLE_BASKET_WITHOUT_ITEMS_STYLE = '''background-color: white;'''
+TABLE_BASKET_WITHOUT_ITEMS_STYLE = '''background-color: #353232;'''
 
 TABLE_BASKET_COLUMN_WIDTH = 170
+
+TABLE_BASKET_ROW_HEIGHT_LESS_6 = 85
+
+TABLE_BASKET_ROW_HEIGHT_MORE_6 = 82
 
 ERROR_TEXT = 'Это устройство уже в корзине сравнения'
 
@@ -53,7 +57,7 @@ ERROR_STYLE = 'color: #FF6600'
 
 REVIEW_STYLE = 'background-color: #353232'
 
-IMAGE_SIZE = 227
+IMAGE_SIZE = 150
 
 WIDGET_NAME_FONT = ('Arial', 15)
 

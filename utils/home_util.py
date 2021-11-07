@@ -37,7 +37,6 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.btn_group_reviews = QButtonGroup()
         self.btn_group_reviews.buttonClicked.connect(self.open_more_about_review)
 
-        self.edit_find.textChanged.connect(lambda: self.edit_find.setText(self.edit_find.text().capitalize()))
         self.edit_find.textChanged.connect(lambda: self.get_gadgets_by_search(['search', self.edit_find.text()]))
         self.btn_filter.clicked.connect(lambda: self.show_filters())
         self.btn_all.clicked.connect(lambda: self.get_gadgets_by_search(['all', '']))
@@ -49,7 +48,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.btn_update.clicked.connect(self.change_password)
 
         self.scroll_bar_style()
-        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITH_ITEMS_STYLE)
+        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITHOUT_ITEMS_STYLE)
         self.get_gadgets_by_search(['all'])
         self.get_username_password()
         self.get_reviews()
@@ -123,13 +122,13 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_pic = QLabel(self)
         if not bool(el[2]):
             img = Image.open(SPARE_PIC_LINK)
-            img2 = img.resize((120, 120))
-            qim = ImageQt(img2)
+            img.resize((150, 150))
+            qim = ImageQt(img)
             pixmap = QPixmap.fromImage(qim)
         else:
             img = Image.open(el[2])
-            img2 = img.resize((120, 120))
-            qim = ImageQt(img2)
+            img.resize((150, 150))
+            qim = ImageQt(img)
             pixmap = QPixmap.fromImage(qim)
         pixmap = pixmap.scaledToWidth(IMAGE_SIZE)
         pixmap = pixmap.scaledToHeight(IMAGE_SIZE)
@@ -163,7 +162,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
             if i == 0:
                 data[i] = f'Средняя цена устройства на Яндекс.Маркете - {el}'
             if i == 1:
-                data[i] = f'Производитель: - {el}'
+                data[i] = f'Производитель - {el}'
             if i == 2:
                 data[i] = f'Размер экрана - {el}"'
             if i == 3:
@@ -199,21 +198,19 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.head = TABLE_BASKET_HEADER
         self.basket_names.append(name)
         self.basket_data.append(data)
-        self.table_gadgets.setColumnCount(8)
-        self.table_gadgets.setRowCount(5)
-        self.table_gadgets.setHorizontalHeaderLabels(self.head)
-        self.table_gadgets.setVerticalHeaderLabels(self.basket_names)
-        self.table_gadgets.setColumnWidth(0, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setColumnWidth(1, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setColumnWidth(2, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setColumnWidth(3, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setColumnWidth(4, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setColumnWidth(5, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setColumnWidth(6, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setColumnWidth(7, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setColumnWidth(8, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setRowCount(len(self.basket_data))
-        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITHOUT_ITEMS_STYLE)
+        self.table_gadgets.setRowCount(8)
+        self.table_gadgets.setColumnCount(len(self.basket_data))
+        self.table_gadgets.setHorizontalHeaderLabels(self.basket_names)
+        self.table_gadgets.setVerticalHeaderLabels(self.head)
+        if len(self.basket_names) <= 5:
+            height = TABLE_BASKET_ROW_HEIGHT_LESS_6
+        else:
+            height = TABLE_BASKET_ROW_HEIGHT_MORE_6
+        for i in range(9):
+            self.table_gadgets.setRowHeight(i, height)
+        for i in range(len(self.basket_names)):
+            self.table_gadgets.setColumnWidth(i, TABLE_BASKET_COLUMN_WIDTH)
+        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITH_ITEMS_STYLE)
         self.print_items_in_basket()
 
     # функция для вывода на экран гаджетов и их характеристик в table_gadgets в корзине сравнения
@@ -221,11 +218,15 @@ class MyWidgetMain(QMainWindow, Main_Form):
         for i, row in enumerate(self.basket_data):
             for j, val in enumerate(row):
                 item = QTableWidgetItem(str(val))
-                self.table_gadgets.setItem(i, j, item)
+                color = QColor(255, 255, 255)
+                item.setBackground(color)
+                color1 = QColor(0, 0, 0)
+                item.setForeground(color1)
+                self.table_gadgets.setItem(j, i, item)
 
     # функция для очистки корзины сравнения
     def clear_everything_in_basket(self):
-        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITH_ITEMS_STYLE)
+        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITHOUT_ITEMS_STYLE)
         self.table_gadgets.clear()
         self.basket_names.clear()
         self.basket_data.clear()
@@ -287,21 +288,17 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
         self.ind_reviews.append(el[0])
 
-        widget_name_review = QLabel(el[1])
-        widget_name_review.setFont(QFont(WIDGET_NAME_FONT[0], WIDGET_NAME_FONT[1]))
-
-        btn_more = QPushButton(REVIEW_BUTTON_TEXT)
+        btn_more = QPushButton(el[1])
         btn_more.setCheckable(True)
 
         self.btn_group_reviews.addButton(btn_more)
         btn_more.setStyleSheet(BTN_READ_MORE)
 
         widget_layout = QHBoxLayout()
-        widget_layout.addWidget(widget_name_review)
         widget_layout.addWidget(btn_more)
         widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
         widget_layout.addStretch()
-        widget_layout.setSpacing(0)
+        widget_layout.setSpacing(20)
         widget.setLayout(widget_layout)
         widget.setStyleSheet(REVIEW_STYLE)
         item.setSizeHint(widget.sizeHint())

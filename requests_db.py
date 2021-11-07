@@ -60,8 +60,11 @@ def get_gadgets(param):
             info = info.split(';')
             count = 0
 
-            if float(param[0][1]) >= float(info[0]) >= float(param[0][0]):
-                count += 1
+            try:
+                if float(param[0][1]) >= float(info[0]) >= float(param[0][0]):
+                    count += 1
+            except ValueError:
+                pass
 
             if info[1] == param[1] or param[1] == 'Все':
                 count += 1
