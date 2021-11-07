@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1894</width>
-    <height>1050</height>
+    <width>1177</width>
+    <height>872</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -37,7 +37,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1991</width>
+      <width>1181</width>
       <height>1141</height>
      </rect>
     </property>
@@ -90,7 +90,7 @@
      <widget class="QPushButton" name="btn_filter">
       <property name="geometry">
        <rect>
-        <x>1620</x>
+        <x>920</x>
         <y>130</y>
         <width>161</width>
         <height>51</height>
@@ -111,7 +111,7 @@
      <widget class="QPushButton" name="btn_all">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>90</x>
         <y>130</y>
         <width>161</width>
         <height>51</height>
@@ -132,7 +132,7 @@
      <widget class="QLabel" name="lbl_find">
       <property name="geometry">
        <rect>
-        <x>770</x>
+        <x>410</x>
         <y>40</y>
         <width>331</width>
         <height>51</height>
@@ -168,9 +168,9 @@
      <widget class="QLineEdit" name="edit_find">
       <property name="geometry">
        <rect>
-        <x>320</x>
+        <x>270</x>
         <y>120</y>
-        <width>1261</width>
+        <width>631</width>
         <height>71</height>
        </rect>
       </property>
@@ -192,8 +192,8 @@
        <rect>
         <x>60</x>
         <y>220</y>
-        <width>1781</width>
-        <height>751</height>
+        <width>1051</width>
+        <height>581</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -208,7 +208,7 @@
      <widget class="QPushButton" name="btn_clear">
       <property name="geometry">
        <rect>
-        <x>809</x>
+        <x>470</x>
         <y>40</y>
         <width>241</width>
         <height>51</height>
@@ -230,9 +230,9 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>120</y>
-        <width>1781</width>
-        <height>851</height>
+        <y>130</y>
+        <width>1051</width>
+        <height>711</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -247,10 +247,10 @@
      <widget class="QLabel" name="lbl_find_2">
       <property name="geometry">
        <rect>
-        <x>450</x>
-        <y>20</y>
-        <width>1021</width>
-        <height>81</height>
+        <x>70</x>
+        <y>30</y>
+        <width>1031</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="font">
@@ -284,9 +284,9 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>120</y>
-        <width>1781</width>
-        <height>851</height>
+        <y>130</y>
+        <width>1051</width>
+        <height>711</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -301,9 +301,9 @@
      <widget class="QLabel" name="label_login">
       <property name="geometry">
        <rect>
-        <x>900</x>
+        <x>520</x>
         <y>300</y>
-        <width>81</width>
+        <width>91</width>
         <height>31</height>
        </rect>
       </property>
@@ -319,9 +319,9 @@
      <widget class="QLineEdit" name="line_login">
       <property name="geometry">
        <rect>
-        <x>830</x>
+        <x>440</x>
         <y>340</y>
-        <width>221</width>
+        <width>241</width>
         <height>31</height>
        </rect>
       </property>
@@ -338,8 +338,8 @@
      <widget class="QLabel" name="label_password">
       <property name="geometry">
        <rect>
-        <x>900</x>
-        <y>420</y>
+        <x>520</x>
+        <y>410</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -356,9 +356,9 @@
      <widget class="QLineEdit" name="line_password">
       <property name="geometry">
        <rect>
-        <x>830</x>
-        <y>460</y>
-        <width>221</width>
+        <x>440</x>
+        <y>450</y>
+        <width>241</width>
         <height>31</height>
        </rect>
       </property>
@@ -372,8 +372,8 @@
      <widget class="QRadioButton" name="radio_update">
       <property name="geometry">
        <rect>
-        <x>1080</x>
-        <y>460</y>
+        <x>690</x>
+        <y>450</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -385,9 +385,9 @@
      <widget class="QPushButton" name="btn_update">
       <property name="geometry">
        <rect>
-        <x>870</x>
-        <y>650</y>
-        <width>141</width>
+        <x>480</x>
+        <y>510</y>
+        <width>161</width>
         <height>41</height>
        </rect>
       </property>
@@ -396,37 +396,6 @@
       </property>
       <property name="text">
        <string>Изменить</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="line_new">
-      <property name="geometry">
-       <rect>
-        <x>830</x>
-        <y>600</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: white; color: black</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_new">
-      <property name="geometry">
-       <rect>
-        <x>850</x>
-        <y>560</y>
-        <width>181</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Новый пароль</string>
       </property>
      </widget>
     </widget>

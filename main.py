@@ -44,7 +44,7 @@ class MyWidgetLogin(QMainWindow, Login_Form):
     # функция, открывающая главную страницу приложения при успешном входе пользователя в систему
     def open_main(self):
         self.hide()
-        MyWidgetMain().showMaximized()
+        MyWidgetMain().show()
 
     # окно ошибки, возникающее при неверном вводе данных или отсутствия в системе
     def print_error(self):

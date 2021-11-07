@@ -156,6 +156,14 @@ def get_reviews_by_button(index):
     return review[0][0], info[0][0].split(';')
 
 
+def get_readmore_by_button(index):
+    data = cur.execute("""SELECT characteristic FROM gadgets WHERE id = ?""",
+                       (index,)).fetchall()
+    name = cur.execute("""SELECT name FROM gadgets WHERE id = ?""",
+                       (index,)).fetchall()
+    return name[0][0], data
+
+
 def get_reviews():
     reviews = cur.execute("""SELECT * FROM reviews""").fetchall()
     return reviews

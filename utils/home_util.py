@@ -58,7 +58,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
     # добавление стиля для ползунка в list_gadgets
     def scroll_bar_style(self):
-        self.list_gadgets.setStyleSheet(SCROLL_STYLE)
+        self.list_gadgets.setStyleSheet(SCROLL_STYLE_VERT)
 
     # функция для открытия окна фильтров
     def show_filters(self):
@@ -110,7 +110,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_name = QLabel(el[1])
         widget_name.setFont(QFont(WIDGET_NAME_FONT[0], WIDGET_NAME_FONT[1]))
 
-        btn_description = QPushButton(f'Подробнее o {el[1]}')
+        btn_description = QPushButton(f'Подробнее')
         btn_description.setCheckable(True)
         self.btn_group_readmore.addButton(btn_description)
         btn_description.setStyleSheet(BTN_DESC_STYLE)
@@ -120,18 +120,15 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.btn_group_tobasket.addButton(btn_add)
         btn_add.setStyleSheet(BTN_ADD_STYLE)
 
-        widget_price = QLabel(f'Средняя цена на Яндекс.Маркете: {el[-1]}')
-        widget_price.setFont(QFont(WIDGET_PRICE_FONT[0], WIDGET_PRICE_FONT[1]))
-
         widget_pic = QLabel(self)
         if not bool(el[2]):
             img = Image.open(SPARE_PIC_LINK)
-            img2 = img.resize((200, 200))
+            img2 = img.resize((120, 120))
             qim = ImageQt(img2)
             pixmap = QPixmap.fromImage(qim)
         else:
             img = Image.open(el[2])
-            img2 = img.resize((200, 200))
+            img2 = img.resize((120, 120))
             qim = ImageQt(img2)
             pixmap = QPixmap.fromImage(qim)
         pixmap = pixmap.scaledToWidth(IMAGE_SIZE)
@@ -141,26 +138,25 @@ class MyWidgetMain(QMainWindow, Main_Form):
         widget_layout = QHBoxLayout()
         widget_layout.addWidget(widget_pic)
         widget_layout.addWidget(widget_name)
-        widget_layout.addWidget(widget_price)
         widget_layout.addWidget(btn_description)
         widget_layout.addWidget(btn_add)
         widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
         widget.setLayout(widget_layout)
-        item.setSizeHint(widget.sizeHint())
+        item.setSizeHint(widget_layout.sizeHint())
         item.setBackground(QColor(ORANGE[0], ORANGE[1], ORANGE[2]))
         return item, widget
 
     # функция для открытия окна по нажатию кнопки "Подробнее"
     def open_read_more(self):
         self.form_info.hide()
-        for el in self.gadgets:
-            if self.btn_group_readmore.checkedButton().text()[12:] == el[1]:
-                data = el[3].split(';')
-                data = self.convert_characteristics(data)
-                text = '\n\n'.join(data)
-                self.form_info.lbl_info.setText(text)
-                self.form_info.lbl_name.setText(str(el[1]))
-                self.form_info.show()
+        ind = self.ind_gadgets[list(self.btn_group_readmore.buttons()).index(self.btn_group_readmore.checkedButton())]
+        name, data = get_readmore_by_button(ind)
+        data = data[0][0].split(';')
+        data = self.convert_characteristics(data)
+        text = '\n\n'.join(data)
+        self.form_info.lbl_info.setText(text)
+        self.form_info.lbl_name.setText(name)
+        self.form_info.show()
 
     def convert_characteristics(self, data):
         for i, el in enumerate(data):
@@ -296,15 +292,16 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
         btn_more = QPushButton(REVIEW_BUTTON_TEXT)
         btn_more.setCheckable(True)
+
         self.btn_group_reviews.addButton(btn_more)
-        btn_more.setStyleSheet(BTN_DESC_STYLE)
+        btn_more.setStyleSheet(BTN_READ_MORE)
 
         widget_layout = QHBoxLayout()
         widget_layout.addWidget(widget_name_review)
         widget_layout.addWidget(btn_more)
         widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
         widget_layout.addStretch()
-        widget_layout.setSpacing(40)
+        widget_layout.setSpacing(0)
         widget.setLayout(widget_layout)
         widget.setStyleSheet(REVIEW_STYLE)
         item.setSizeHint(widget.sizeHint())
@@ -317,4 +314,4 @@ class MyWidgetMain(QMainWindow, Main_Form):
         review, info = get_reviews_by_button(index)
         self.form_review.text_data.setPlainText(info[0])
         self.form_review.lbl_name.setText(review)
-        self.form_review.showMaximized()
+        self.form_review.show()
