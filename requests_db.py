@@ -1,6 +1,9 @@
-import sqlite3
+import MySQLdb
 
-con = sqlite3.connect("main_db.sqlite")
+con = MySQLdb.connect(user='sql11450697',
+                      password='RC3RghhPkm',
+                      host='sql11.freemysqlhosting.net',
+                      database='sql11450697')
 cur = con.cursor()
 
 
@@ -9,8 +12,10 @@ def check_user_in_system(username, password):
     global user, pas
     if username == 0 and password == 0:
         return user, pas
-    data = cur.execute("""SELECT id FROM users WHERE username = ? AND password = ?""",
-                       (str(username), str(password))).fetchall()
+    i = 1
+    cur.execute(f"""SELECT * from users where id = {i}""")
+    data = cur.fetchall()
+    print(data)
     user = username
     pas = password
     if len(data) == 0:
@@ -21,9 +26,10 @@ def check_user_in_system(username, password):
 # функция отвечающая за изменение пароля
 def update_password(new, username):
     if bool(new):
-        cur.execute("""UPDATE users
-                        SET password = ?
-                        WHERE username = ?""", (new, username)).fetchall()
+        # TODO: НЕ РАБОТАЕТ ИЗМЕНЕНИЕ ПАРОЛЯ
+        cur.execute(f"""UPDATE users
+                        SET password = {new}
+                        WHERE username = {username}""")
         con.commit()
         return new
     else:
@@ -35,8 +41,7 @@ def register_new_user(username, password):
     us = cur.execute("""SELECT * FROM users""").fetchall()
     if not bool(username) or not bool(password):
         return [False, 'Оба поля не должны быть пустыми']
-    cur.execute("""INSERT INTO users VALUES(?, ?, ?)""",
-                (len(us) + 1, str(username), str(password))).fetchall()
+    cur.execute(f"""INSERT INTO users VALUES({len(us) + 1}, {str(username)}, {str(password)})""")
     con.commit()
     return [True, 0]
 
@@ -44,16 +49,18 @@ def register_new_user(username, password):
 # функция отвечающая за получение определенного набора гаджетов для главной страницы
 def get_gadgets(param):
     if param[0] == 'all':
-        gadgets = cur.execute("""SELECT * FROM gadgets""").fetchall()
+        cur.execute("""SELECT * FROM gadgets""")
+        gadgets = cur.fetchall()
         return gadgets
     if param[0] == 'search':
         param = param[1]
-        par = f'%{param}%'
-        gadgets = cur.execute("""SELECT * FROM gadgets
-                                    WHERE name LIKE ?""", (par,)).fetchall()
+        # TODO: ПОИСК ПО СТРОКЕ ПОИСКА НЕ РАБОТАЕТ
+        cur.execute(f"""SELECT * FROM gadgets WHERE name LIKE %{str(param)}%""")
+        gadgets = cur.fetchall()
         return gadgets
     if param[0] == 'filter':
-        characteristics = cur.execute("""SELECT id, characteristic FROM gadgets""").fetchall()
+        cur.execute("""SELECT id, characteristic FROM gadgets""")
+        characteristics = cur.fetchall()
         param = param[1]
         indexes = []
         for index, info in characteristics:
@@ -136,37 +143,39 @@ def get_gadgets(param):
 
         gadgets = []
         for el in indexes:
-            gadget = cur.execute("""SELECT * FROM gadgets WHERE id = ?""", (el,)).fetchall()
+            cur.execute(f"""SELECT * FROM gadgets WHERE id = {el}""")
+            gadget = cur.fetchall()
             gadgets.append(gadget[0])
         return gadgets
 
 
 # функция отвечающая за сбор информации об устройстве из базы данных
 def get_info_for_basket(ind):
-    data = cur.execute("""SELECT characteristic FROM gadgets WHERE id = ?""",
-                       (ind,)).fetchall()
-    name = cur.execute("""SELECT name FROM gadgets WHERE id = ?""",
-                       (ind,)).fetchall()
+    cur.execute(f"""SELECT characteristic FROM gadgets WHERE id = {ind}""")
+    data = cur.fetchall()
+    cur.execute(f"""SELECT name FROM gadgets WHERE id = {ind}""")
+    name = cur.fetchall()
     return name[0][0], data[0][0].split(';')
 
 
 # функция отвечающая за сбор обзоров из базы данных
 def get_reviews_by_button(index):
-    info = cur.execute("""SELECT info FROM reviews WHERE id = ?""",
-                       (index,)).fetchall()
-    review = cur.execute("""SELECT name FROM reviews WHERE id = ?""",
-                         (index,)).fetchall()
+    cur.execute(f"""SELECT info FROM reviews WHERE id = {index}""")
+    info = cur.fetchall()
+    cur.execute(f"""SELECT name FROM reviews WHERE id = {index}""")
+    review = cur.fetchall()
     return review[0][0], info[0][0].split(';')
 
 
 def get_readmore_by_button(index):
-    data = cur.execute("""SELECT characteristic FROM gadgets WHERE id = ?""",
-                       (index,)).fetchall()
-    name = cur.execute("""SELECT name FROM gadgets WHERE id = ?""",
-                       (index,)).fetchall()
+    cur.execute(f"""SELECT characteristic FROM gadgets WHERE id = {index}""")
+    data = cur.fetchall()
+    cur.execute(f"""SELECT name FROM gadgets WHERE id = {index}""")
+    name = cur.fetchall()
     return name[0][0], data
 
 
 def get_reviews():
-    reviews = cur.execute("""SELECT * FROM reviews""").fetchall()
+    cur.execute("""SELECT * FROM reviews""")
+    reviews = cur.fetchall()
     return reviews

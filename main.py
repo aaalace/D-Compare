@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import QApplication
 from templates.forms.login import Login_Form
 from requests_db import *
 from utils.CONSTANTS.CONST_login import *
-
 from utils.home_util import MyWidgetMain
 from utils.signin_util import MyWidgetSignin
 
