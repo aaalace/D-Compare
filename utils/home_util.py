@@ -7,7 +7,7 @@ from templates.forms.main_wind import Main_Form
 from .filters_util import MyWidgetFilters
 from .readmore_util import WidgetReadMore
 from .reviewmore_util import WidgetReviewMore
-from requests_db import *
+from utils.requests_db import *
 from utils.CONSTANTS.CONST_home_util import *
 
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, \

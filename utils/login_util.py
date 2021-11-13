@@ -1,4 +1,4 @@
-from requests_db import *
+from utils.requests_db import *
 from utils.CONSTANTS.CONST_login import *
 
 from templates.forms.login import Login_Form

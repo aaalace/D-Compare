@@ -1,7 +1,7 @@
 from templates.forms.filters import Filters_Form
 
 from utils.CONSTANTS.CONST_filters_util import *
-from requests_db import *
+from utils.requests_db import *
 
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QIcon
@@ -31,15 +31,13 @@ class MyWidgetFilters(QMainWindow, Filters_Form):
 
     # вспомогательная функция для добавления параметров в QComboBox виджеты
     def add_filters(self):
-        file = open('additional_files/filters.txt', encoding='utf-8')
-        lines = [line.rstrip() for line in file]
-        self.box_producer.addItems(lines[0].split(';'))
-        self.box_display_size.addItems(lines[1].split(';'))
-        self.box_battery.addItems(lines[2].split(';'))
-        self.box_ram.addItems(lines[3].split(';'))
-        self.box_base_camera.addItems(lines[4].split(';'))
-        self.box_front_camera.addItems(lines[5].split(';'))
-        self.box_matrix.addItems(lines[6].split(';'))
+        self.box_producer.addItems(PRODUCER)
+        self.box_display_size.addItems(SCREEN_SIZE)
+        self.box_battery.addItems(BATTERY)
+        self.box_ram.addItems(RAM)
+        self.box_base_camera.addItems(BASE_CAMERA)
+        self.box_front_camera.addItems(FRONT_CAMERA)
+        self.box_matrix.addItems(MATRIX)
 
     # функция возврата начальных параметров в фильтрах
     def return_start_params(self):

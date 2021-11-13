@@ -15,7 +15,6 @@ def check_user_in_system(username, password):
     i = 1
     cur.execute(f"""SELECT * from users where id = {i}""")
     data = cur.fetchall()
-    print(data)
     user = username
     pas = password
     if len(data) == 0:
@@ -26,10 +25,9 @@ def check_user_in_system(username, password):
 # функция отвечающая за изменение пароля
 def update_password(new, username):
     if bool(new):
-        # TODO: НЕ РАБОТАЕТ ИЗМЕНЕНИЕ ПАРОЛЯ
         cur.execute(f"""UPDATE users
-                        SET password = {new}
-                        WHERE username = {username}""")
+                        SET password = '{new}'
+                        WHERE username = '{username}'""")
         con.commit()
         return new
     else:
@@ -54,8 +52,8 @@ def get_gadgets(param):
         return gadgets
     if param[0] == 'search':
         param = param[1]
-        # TODO: ПОИСК ПО СТРОКЕ ПОИСКА НЕ РАБОТАЕТ
-        cur.execute(f"""SELECT * FROM gadgets WHERE name LIKE %{str(param)}%""")
+        sql = f"SELECT * FROM gadgets WHERE name LIKE '{param}%'"
+        cur.execute(sql)
         gadgets = cur.fetchall()
         return gadgets
     if param[0] == 'filter':
