@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>892</width>
-    <height>609</height>
+    <width>1245</width>
+    <height>783</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,19 +19,22 @@
   <widget class="QLabel" name="lbl_name">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>20</y>
-     <width>831</width>
-     <height>101</height>
+     <x>11</x>
+     <y>11</y>
+     <width>1231</width>
+     <height>60</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <pointsize>20</pointsize>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: #FF6600</string>
+    <string notr="true">color: #FF6600;
+ margin: 0 auto;
+ margin-bottom: 10px;
+margin-top: 10px</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -40,28 +43,44 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_info">
+  <widget class="QPlainTextEdit" name="text_info">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>90</y>
-     <width>831</width>
-     <height>491</height>
+     <x>11</x>
+     <y>78</y>
+     <width>1231</width>
+     <height>681</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <pointsize>14</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
    <property name="styleSheet">
-    <string notr="true">color: white</string>
+    <string notr="true">color: #FF6600;
+margin: 0 auto;
+margin-bottom: 10px</string>
    </property>
-   <property name="text">
-    <string>TextLabel</string>
+   <property name="locale">
+    <locale language="Russian" country="Russia"/>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+   <property name="plainText">
+    <string>wefr</string>
    </property>
   </widget>
  </widget>

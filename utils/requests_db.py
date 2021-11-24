@@ -12,8 +12,7 @@ def check_user_in_system(username, password):
     global user, pas
     if username == 0 and password == 0:
         return user, pas
-    i = 1
-    cur.execute(f"""SELECT * from users where id = {i}""")
+    cur.execute(f"""SELECT * from users WHERE username = '{username}' AND password = '{password}'""")
     data = cur.fetchall()
     user = username
     pas = password
@@ -36,10 +35,11 @@ def update_password(new, username):
 
 # добавление нового пользователя в БД с проверкой на условия данных
 def register_new_user(username, password):
-    us = cur.execute("""SELECT * FROM users""").fetchall()
+    us = cur.execute("""SELECT * FROM users""")
+    print(us)
     if not bool(username) or not bool(password):
         return [False, 'Оба поля не должны быть пустыми']
-    cur.execute(f"""INSERT INTO users VALUES({len(us) + 1}, {str(username)}, {str(password)})""")
+    cur.execute(f"""INSERT users(id, username, password) VALUES({us + 1}, {str(username)}, {str(password)})""")
     con.commit()
     return [True, 0]
 
@@ -52,7 +52,7 @@ def get_gadgets(param):
         return gadgets
     if param[0] == 'search':
         param = param[1]
-        sql = f"SELECT * FROM gadgets WHERE name LIKE '{param}%'"
+        sql = f"SELECT * FROM gadgets WHERE name LIKE '%{param}%'"
         cur.execute(sql)
         gadgets = cur.fetchall()
         return gadgets

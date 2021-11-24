@@ -6,12 +6,14 @@ from utils.requests_db import *
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QSize
+from PyQt5.QtCore import Qt
 
 
 class MyWidgetFilters(QMainWindow, Filters_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.CustomizeWindowHint)
         self.btn_clear.setIcon(QIcon(LINK_TO_DEL_BTN_PIC))
         self.btn_clear.setIconSize(QSize(PIC_SIZE[0], PIC_SIZE[1]))
         self.add_filters()

@@ -1,15 +1,13 @@
 import sys
-from PyQt5.QtWidgets import QApplication
+
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QMessageBox
+from PyQt5.QtGui import QPixmap
 
 from templates.forms.login import Login_Form
 from utils.requests_db import *
 from utils.CONSTANTS.CONST_login import *
 from utils.home_util import MyWidgetMain
 from utils.signin_util import MyWidgetSignin
-
-from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QLabel, QLineEdit, QMessageBox
 
 
 class MyWidgetLogin(QMainWindow, Login_Form):
@@ -23,15 +21,16 @@ class MyWidgetLogin(QMainWindow, Login_Form):
         self.lbl_pic.move(LOGO_IMAGE_MOVE[0], LOGO_IMAGE_MOVE[1])
         self.line_password.setEchoMode(QLineEdit.Password)
         self.sign_in = MyWidgetSignin()
-
         self.btn_register.clicked.connect(self.open_register)
         self.btn_entry.clicked.connect(self.check_login)
 
     # функция, обращается к функции в requests_db, проверяет наличие пользователя в системе
     def check_login(self):
+        self.hide()
         if check_user_in_system(self.line_login.text(), self.line_password.text()):
             self.open_main()
         else:
+            self.show()
             self.print_error()
 
     # функция, открывающая окно регистрации по нажатию кнопки btn.register
@@ -42,7 +41,6 @@ class MyWidgetLogin(QMainWindow, Login_Form):
 
     # функция, открывающая главную страницу приложения при успешном входе пользователя в систему
     def open_main(self):
-        self.hide()
         MyWidgetMain().show()
 
     # окно ошибки, возникающее при неверном вводе данных или отсутствия в системе

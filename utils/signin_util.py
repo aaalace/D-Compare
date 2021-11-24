@@ -1,7 +1,9 @@
+import os
+import hashlib
+
 from templates.forms.signin import Signin_Form
 from utils.requests_db import *
 from utils.CONSTANTS.CONST_signin_util import *
-
 
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QPixmap
@@ -23,6 +25,8 @@ class MyWidgetSignin(QMainWindow, Signin_Form):
 
     # функция, обращается к функции в requests_db, регистрирует нового пользователя в системе
     def register(self):
+        salt = os.urandom(32)  # A new salt for this user
+        key = hashlib.pbkdf2_hmac('sha256', self.line_password.text().encode('utf-8'), salt, 100000)
         res = register_new_user(self.line_login.text(), self.line_password.text())
         if res[0]:
             self.open_login()

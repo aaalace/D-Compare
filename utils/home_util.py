@@ -1,14 +1,15 @@
 from PIL.ImageQt import ImageQt
 from PIL import Image
 
-
-from templates.forms.main_wind import Main_Form
+from templates.forms.main_wind import Ui_MainWindow
 
 from .filters_util import MyWidgetFilters
 from .readmore_util import WidgetReadMore
 from .reviewmore_util import WidgetReviewMore
-from utils.requests_db import *
-from utils.CONSTANTS.CONST_home_util import *
+from .loading_util import LoadingScreen
+import utils.requests_db as req
+from utils.scraper import *
+from .CONSTANTS.CONST_home_util import *
 
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, \
     QHBoxLayout, QButtonGroup, QTableWidgetItem, QMessageBox, QLineEdit, QInputDialog
@@ -16,7 +17,7 @@ from PyQt5.QtWidgets import QLabel, QPushButton
 from PyQt5.QtGui import QFont, QColor, QPixmap
 
 
-class MyWidgetMain(QMainWindow, Main_Form):
+class MyWidgetMain(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -29,6 +30,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
         self.form_info = WidgetReadMore()
         self.form_filters = MyWidgetFilters()
         self.form_review = WidgetReviewMore()
+        self.form_load = LoadingScreen()
 
         self.btn_group_readmore = QButtonGroup()
         self.btn_group_readmore.buttonClicked.connect(self.open_read_more)
@@ -61,6 +63,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
     # функция для открытия окна фильтров
     def show_filters(self):
+        self.setEnabled(False)
         self.form_filters.hide()
         self.form_filters.show()
 
@@ -68,6 +71,8 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
     # функция для получения гаджетов по параметрам фильтра
     def get_gadgets_by_params(self):
+        self.setEnabled(True)
+        self.form_load.show()
         self.form_filters.close()
         self.list_gadgets.clear()
         price = [self.form_filters.line_from.text(), self.form_filters.line_to.text()]
@@ -78,14 +83,15 @@ class MyWidgetMain(QMainWindow, Main_Form):
         base_camera = self.form_filters.box_base_camera.currentText()
         front_camera = self.form_filters.box_front_camera.currentText()
         matrix = self.form_filters.box_matrix.currentText()
-        self.gadgets = get_gadgets(['filter', [price, producer, display_size, battery, ram,
+        self.gadgets = req.get_gadgets(['filter', [price, producer, display_size, battery, ram,
                                base_camera, front_camera, matrix]])
         self.print_items_in_list_gadgets()
 
     # функция для получения гаджетов по параметрам поисковой строки
     def get_gadgets_by_search(self, param):
+        self.form_load.show()
         self.list_gadgets.clear()
-        self.gadgets = get_gadgets(param)
+        self.gadgets = req.get_gadgets(param)
         self.print_items_in_list_gadgets()
 
     # функция для вывода на экран гаджетов в list_gadgets
@@ -98,6 +104,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
             # добавление виджета в лист
             self.list_gadgets.addItem(item)
             self.list_gadgets.setItemWidget(item, widget)
+        self.form_load.hide()
 
     # функция создания виджета для каждого гаджета в list_gadgets
     def create_item_in_list_gadgets(self, el):
@@ -120,16 +127,18 @@ class MyWidgetMain(QMainWindow, Main_Form):
         btn_add.setStyleSheet(BTN_ADD_STYLE)
 
         widget_pic = QLabel(self)
-        if not bool(el[2]):
-            img = Image.open(SPARE_PIC_LINK)
-            img.resize((150, 150))
-            qim = ImageQt(img)
-            pixmap = QPixmap.fromImage(qim)
+        img = Image.open(get_pic())
+        w, h = img.size
+        if w > h:
+            ma = w
+            mi = h
+            img.resize((200, int(mi / ma * 200)))
         else:
-            img = Image.open(el[2])
-            img.resize((150, 150))
-            qim = ImageQt(img)
-            pixmap = QPixmap.fromImage(qim)
+            ma = h
+            mi = w
+            img.resize((int(mi / ma * 200), 200))
+        qim = ImageQt(img)
+        pixmap = QPixmap.fromImage(qim)
         pixmap = pixmap.scaledToWidth(IMAGE_SIZE)
         pixmap = pixmap.scaledToHeight(IMAGE_SIZE)
         widget_pic.setPixmap(pixmap)
@@ -148,41 +157,22 @@ class MyWidgetMain(QMainWindow, Main_Form):
     # функция для открытия окна по нажатию кнопки "Подробнее"
     def open_read_more(self):
         self.form_info.hide()
-        ind = self.ind_gadgets[list(self.btn_group_readmore.buttons()).index(self.btn_group_readmore.checkedButton())]
-        name, data = get_readmore_by_button(ind)
-        data = data[0][0].split(';')
-        data = self.convert_characteristics(data)
-        text = '\n\n'.join(data)
-        self.form_info.lbl_info.setText(text)
-        self.form_info.lbl_name.setText(name)
+        data = get_info()
+        text = ''
+        for key, value in data.items():
+            text += f'{key}\n\n'
+            text += f'{value}\n\n'
+            text += f'--------------\n\n'
+        self.form_info.lbl_name.setText('OnePlus 9Pro')
+        self.form_info.text_info.setPlainText(text)
         self.form_info.show()
-
-    def convert_characteristics(self, data):
-        for i, el in enumerate(data):
-            if i == 0:
-                data[i] = f'Средняя цена устройства на Яндекс.Маркете - {el}'
-            if i == 1:
-                data[i] = f'Производитель - {el}'
-            if i == 2:
-                data[i] = f'Размер экрана - {el}"'
-            if i == 3:
-                data[i] = f'Ёмкость аккумулятора - {el} мАч'
-            if i == 4:
-                data[i] = f'Оперативная память: - {el} ГБ'
-            if i == 5:
-                data[i] = f'Основная камера - {el} Мп'
-            if i == 6:
-                data[i] = f'Фронтальная камера: - {el} Мп'
-            if i == 7:
-                data[i] = f'Тип матрицы - {el}'
-        return data
 
     # функции отвечающие за корзину сравнения:
 
     # функция для добавления гаджета и характеристики в корзину сравнения
     def add_to_basket(self):
         ind = self.ind_gadgets[list(self.btn_group_tobasket.buttons()).index(self.btn_group_tobasket.checkedButton())]
-        name, data = get_info_for_basket(ind)
+        name, data = req.get_info_for_basket(ind)
         if name in self.basket_names:
             error = QMessageBox(self)
             error.setText(ERROR_TEXT)
@@ -240,7 +230,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
 
     # функция для получения логина и пароля пользователя
     def get_username_password(self):
-        user, pas = check_user_in_system(0, 0)
+        user, pas = req.check_user_in_system(0, 0)
         self.line_login.setText(user)
         self.line_password.setText(pas)
         self.line_password.setEchoMode(QLineEdit.Password)
@@ -260,14 +250,14 @@ class MyWidgetMain(QMainWindow, Main_Form):
                                           DIALOG_TEXT)
 
         if ok:
-            updated_password = update_password(text, self.line_login.text())
+            updated_password = req.update_password(text, self.line_login.text())
             self.line_password.setText(updated_password)
 
     # функции отвечающие за страницу обзоры и рекомендации:
 
     # функция для получения списка статей
     def get_reviews(self):
-        self.reviews = get_reviews()
+        self.reviews = req.get_reviews()
         self.print_items_in_list_reviews()
 
     # функция для вывода на экран всех обзоров в list_reviews
@@ -308,7 +298,7 @@ class MyWidgetMain(QMainWindow, Main_Form):
     def open_more_about_review(self):
         self.form_review.hide()
         index = self.ind_reviews[list(self.btn_group_reviews.buttons()).index(self.btn_group_reviews.checkedButton())]
-        review, info = get_reviews_by_button(index)
+        review, info = req.get_reviews_by_button(index)
         self.form_review.text_data.setPlainText(info[0])
         self.form_review.lbl_name.setText(review)
         self.form_review.show()

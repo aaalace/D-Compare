@@ -14,24 +14,35 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Info_Form(object):
     def setupUi(self, Info_Form):
         Info_Form.setObjectName("Info_Form")
-        Info_Form.resize(892, 609)
+        Info_Form.resize(1245, 783)
         Info_Form.setStyleSheet("background-color: #353232")
         self.lbl_name = QtWidgets.QLabel(Info_Form)
-        self.lbl_name.setGeometry(QtCore.QRect(30, 20, 831, 101))
+        self.lbl_name.setGeometry(QtCore.QRect(11, 11, 1231, 60))
         font = QtGui.QFont()
-        font.setPointSize(16)
+        font.setPointSize(20)
         self.lbl_name.setFont(font)
-        self.lbl_name.setStyleSheet("color: #FF6600")
+        self.lbl_name.setStyleSheet("color: #FF6600;\n"
+" margin: 0 auto;\n"
+" margin-bottom: 10px;\n"
+"margin-top: 10px")
         self.lbl_name.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_name.setObjectName("lbl_name")
-        self.lbl_info = QtWidgets.QLabel(Info_Form)
-        self.lbl_info.setGeometry(QtCore.QRect(30, 90, 831, 491))
+        self.text_info = QtWidgets.QPlainTextEdit(Info_Form)
+        self.text_info.setGeometry(QtCore.QRect(11, 78, 1231, 681))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        self.lbl_info.setFont(font)
-        self.lbl_info.setStyleSheet("color: white")
-        self.lbl_info.setAlignment(QtCore.Qt.AlignCenter)
-        self.lbl_info.setObjectName("lbl_info")
+        font.setPointSize(14)
+        font.setBold(False)
+        font.setWeight(50)
+        self.text_info.setFont(font)
+        self.text_info.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.text_info.setStyleSheet("color: #FF6600;\n"
+"margin: 0 auto;\n"
+"margin-bottom: 10px")
+        self.text_info.setLocale(QtCore.QLocale(QtCore.QLocale.Russian, QtCore.QLocale.Russia))
+        self.text_info.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.text_info.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.text_info.setReadOnly(True)
+        self.text_info.setObjectName("text_info")
 
         self.retranslateUi(Info_Form)
         QtCore.QMetaObject.connectSlotsByName(Info_Form)
@@ -40,4 +51,4 @@ class Ui_Info_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Info_Form.setWindowTitle(_translate("Info_Form", "Характеристики"))
         self.lbl_name.setText(_translate("Info_Form", "TextLabel"))
-        self.lbl_info.setText(_translate("Info_Form", "TextLabel"))
+        self.text_info.setPlainText(_translate("Info_Form", "wefr"))
