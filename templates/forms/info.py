@@ -12,23 +12,31 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Info_Form(object):
-    def setupUi(self, Info_Form):
-        Info_Form.setObjectName("Info_Form")
-        Info_Form.resize(1245, 783)
-        Info_Form.setStyleSheet("background-color: #353232")
-        self.lbl_name = QtWidgets.QLabel(Info_Form)
-        self.lbl_name.setGeometry(QtCore.QRect(11, 11, 1231, 60))
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.setWindowModality(QtCore.Qt.NonModal)
+        Form.resize(1100, 700)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
+        Form.setSizePolicy(sizePolicy)
+        Form.setStyleSheet("background-color:rgb(66, 66, 66); ")
+        self.lbl_name = QtWidgets.QLabel(Form)
+        self.lbl_name.setGeometry(QtCore.QRect(11, 11, 1081, 81))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.lbl_name.setFont(font)
         self.lbl_name.setStyleSheet("color: #FF6600;\n"
-" margin: 0 auto;\n"
-" margin-bottom: 10px;\n"
-"margin-top: 10px")
+"margin: 0 auto;\n"
+"margin-bottom: 10px;\n"
+"margin-top: 10px;\n"
+"background-color: rgba(0, 0, 0, 0)\n"
+"")
         self.lbl_name.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_name.setObjectName("lbl_name")
-        self.text_info = QtWidgets.QPlainTextEdit(Info_Form)
-        self.text_info.setGeometry(QtCore.QRect(11, 78, 1231, 681))
+        self.text_info = QtWidgets.QPlainTextEdit(Form)
+        self.text_info.setGeometry(QtCore.QRect(11, 88, 1081, 581))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(False)
@@ -37,18 +45,20 @@ class Ui_Info_Form(object):
         self.text_info.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.text_info.setStyleSheet("color: #FF6600;\n"
 "margin: 0 auto;\n"
-"margin-bottom: 10px")
+"margin-bottom: 10px;\n"
+"background-color: #353232;\n"
+"border-radius: 10px")
         self.text_info.setLocale(QtCore.QLocale(QtCore.QLocale.Russian, QtCore.QLocale.Russia))
         self.text_info.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.text_info.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.text_info.setReadOnly(True)
         self.text_info.setObjectName("text_info")
 
-        self.retranslateUi(Info_Form)
-        QtCore.QMetaObject.connectSlotsByName(Info_Form)
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def retranslateUi(self, Info_Form):
+    def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Info_Form.setWindowTitle(_translate("Info_Form", "Характеристики"))
-        self.lbl_name.setText(_translate("Info_Form", "TextLabel"))
-        self.text_info.setPlainText(_translate("Info_Form", "wefr"))
+        Form.setWindowTitle(_translate("Form", "Характеристики"))
+        self.lbl_name.setText(_translate("Form", "TextLabel"))
+        self.text_info.setPlainText(_translate("Form", "wefr"))

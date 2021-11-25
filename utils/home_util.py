@@ -149,13 +149,14 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
     # функция для открытия окна по нажатию кнопки "Подробнее"
     def open_read_more(self):
         self.form_info.hide()
-        data = get_info()
+        ind = self.ind_gadgets[list(self.btn_group_readmore.buttons()).index(self.btn_group_readmore.checkedButton())]
+        data, name = get_info(ind)
         text = ''
         for key, value in data.items():
             text += f'{key}\n\n'
             text += f'{value}\n\n'
             text += f'--------------\n\n'
-        self.form_info.lbl_name.setText('OnePlus 9Pro')
+        self.form_info.lbl_name.setText(name)
         self.form_info.text_info.setPlainText(text)
         self.form_info.show()
 

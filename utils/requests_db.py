@@ -166,11 +166,11 @@ def get_reviews_by_button(index):
 
 
 def get_readmore_by_button(index):
-    cur.execute(f"""SELECT characteristic FROM gadgets WHERE id = {index}""")
+    cur.execute(f"""SELECT url FROM gadgets WHERE id = {index}""")
     data = cur.fetchall()
     cur.execute(f"""SELECT name FROM gadgets WHERE id = {index}""")
     name = cur.fetchall()
-    return name[0][0], data
+    return name[0][0], data[0][0]
 
 
 def get_reviews():
