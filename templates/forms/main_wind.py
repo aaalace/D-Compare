@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(972, 722)
+        MainWindow.resize(1920, 1051)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -75,9 +75,10 @@ class Ui_MainWindow(object):
         self.lbl_find.setObjectName("lbl_find")
         self.verticalLayout.addWidget(self.lbl_find)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setContentsMargins(25, -1, 25, -1)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.btn_all = QtWidgets.QPushButton(self.tab_home)
-        self.btn_all.setMinimumSize(QtCore.QSize(150, 50))
+        self.btn_all.setMinimumSize(QtCore.QSize(160, 60))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.btn_all.setFont(font)
@@ -85,7 +86,7 @@ class Ui_MainWindow(object):
         self.btn_all.setObjectName("btn_all")
         self.horizontalLayout.addWidget(self.btn_all)
         self.edit_find = QtWidgets.QLineEdit(self.tab_home)
-        self.edit_find.setMinimumSize(QtCore.QSize(600, 60))
+        self.edit_find.setMinimumSize(QtCore.QSize(550, 80))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setStyleStrategy(QtGui.QFont.PreferDefault)
@@ -95,7 +96,7 @@ class Ui_MainWindow(object):
         self.edit_find.setObjectName("edit_find")
         self.horizontalLayout.addWidget(self.edit_find)
         self.btn_filter = QtWidgets.QPushButton(self.tab_home)
-        self.btn_filter.setMinimumSize(QtCore.QSize(150, 50))
+        self.btn_filter.setMinimumSize(QtCore.QSize(160, 60))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.btn_filter.setFont(font)
@@ -105,7 +106,8 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.list_gadgets = QtWidgets.QListWidget(self.tab_home)
         self.list_gadgets.setMinimumSize(QtCore.QSize(0, 300))
-        self.list_gadgets.setStyleSheet("background-color: white")
+        self.list_gadgets.setStyleSheet("background-color: #FFF;\n"
+"border-radius: 10px;")
         self.list_gadgets.setObjectName("list_gadgets")
         self.verticalLayout.addWidget(self.list_gadgets)
         self.tabWidget.addTab(self.tab_home, "")
@@ -131,7 +133,13 @@ class Ui_MainWindow(object):
         self.btn_clear.setObjectName("btn_clear")
         self.verticalLayout_2.addWidget(self.btn_clear, 0, QtCore.Qt.AlignHCenter)
         self.table_gadgets = QtWidgets.QTableWidget(self.tab_basket)
-        self.table_gadgets.setStyleSheet("background-color: white")
+        self.table_gadgets.setStyleSheet("background-color: white;\n"
+"color: #FF6600;\n"
+"border-radius: 10px;\n"
+"QScrollBar::vertical {              \n"
+"                  background-color: #FF6600;\n"
+"                  width:20px;\n"
+"                  };")
         self.table_gadgets.setObjectName("table_gadgets")
         self.table_gadgets.setColumnCount(0)
         self.table_gadgets.setRowCount(0)
@@ -142,6 +150,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.tab_reviews)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.lbl_find_2 = QtWidgets.QLabel(self.tab_reviews)
+        self.lbl_find_2.setMinimumSize(QtCore.QSize(0, 50))
         font = QtGui.QFont()
         font.setPointSize(28)
         self.lbl_find_2.setFont(font)
@@ -154,7 +163,13 @@ class Ui_MainWindow(object):
         self.lbl_find_2.setObjectName("lbl_find_2")
         self.verticalLayout_3.addWidget(self.lbl_find_2)
         self.list_reviews = QtWidgets.QListWidget(self.tab_reviews)
-        self.list_reviews.setStyleSheet("background-color: white")
+        self.list_reviews.setStyleSheet("background-color: white;\n"
+"color: #FF6600;\n"
+"border-radius: 10px;\n"
+"QScrollBar::vertical {              \n"
+"                  background-color: #FF6600;\n"
+"                  width:20px;\n"
+"                  };")
         self.list_reviews.setObjectName("list_reviews")
         self.verticalLayout_3.addWidget(self.list_reviews)
         self.tabWidget.addTab(self.tab_reviews, "")
@@ -180,7 +195,7 @@ class Ui_MainWindow(object):
         self.horizontalWidget_2 = QtWidgets.QWidget(self.verticalWidget)
         self.horizontalWidget_2.setObjectName("horizontalWidget_2")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.horizontalWidget_2)
-        self.horizontalLayout_4.setContentsMargins(-1, 0, 0, 0)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_4.setSpacing(0)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.line_login = QtWidgets.QLineEdit(self.horizontalWidget_2)
@@ -188,7 +203,7 @@ class Ui_MainWindow(object):
         self.line_login.setMaximumSize(QtCore.QSize(210, 30))
         self.line_login.setContextMenuPolicy(QtCore.Qt.PreventContextMenu)
         self.line_login.setStyleSheet("background-color: white; color: black")
-        self.line_login.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.line_login.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.line_login.setReadOnly(True)
         self.line_login.setObjectName("line_login")
         self.horizontalLayout_4.addWidget(self.line_login)
@@ -218,7 +233,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.line_password)
         self.verticalLayout_4.addWidget(self.horizontalWidget_21)
         self.radio_update = QtWidgets.QRadioButton(self.verticalWidget)
-        self.radio_update.setMaximumSize(QtCore.QSize(80, 16777215))
+        self.radio_update.setMaximumSize(QtCore.QSize(140, 16777215))
         self.radio_update.setStyleSheet("color: #FF6600;")
         self.radio_update.setObjectName("radio_update")
         self.verticalLayout_4.addWidget(self.radio_update, 0, QtCore.Qt.AlignHCenter)
@@ -237,7 +252,7 @@ class Ui_MainWindow(object):
         self.action.setObjectName("action")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -253,7 +268,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_reviews), _translate("MainWindow", "Обзоры и статьи"))
         self.label_login.setText(_translate("MainWindow", "Логин"))
         self.label_password.setText(_translate("MainWindow", "Пароль"))
-        self.radio_update.setText(_translate("MainWindow", "Показать"))
+        self.radio_update.setText(_translate("MainWindow", "Показать пароль"))
         self.btn_update.setText(_translate("MainWindow", "Изменить"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Профиль"))
         self.action.setText(_translate("MainWindow", "сц"))

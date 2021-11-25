@@ -1,5 +1,6 @@
 from PIL.ImageQt import ImageQt
 from PIL import Image
+from PyQt5 import QtCore
 
 from templates.forms.main_wind import Ui_MainWindow
 
@@ -49,16 +50,15 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
         self.radio_update.clicked.connect(self.change_pass_echo)
         self.btn_update.clicked.connect(self.change_password)
 
-        self.scroll_bar_style()
-        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITHOUT_ITEMS_STYLE)
+        self.style()
         self.get_gadgets_by_search(['all'])
         self.get_username_password()
         self.get_reviews()
 
     # вспомогательные функции:
 
-    # добавление стиля для ползунка в list_gadgets
-    def scroll_bar_style(self):
+    # добавление доп стилей
+    def style(self):
         self.list_gadgets.setStyleSheet(SCROLL_STYLE_VERT)
 
     # функция для открытия окна фильтров
@@ -106,6 +106,9 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
             self.list_gadgets.setItemWidget(item, widget)
         self.form_load.hide()
 
+    def resize_img(self):
+        self.create_item_in_list_gadgets()
+
     # функция создания виджета для каждого гаджета в list_gadgets
     def create_item_in_list_gadgets(self, el):
         item = QListWidgetItem()
@@ -115,6 +118,7 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
 
         widget_name = QLabel(el[1])
         widget_name.setFont(QFont(WIDGET_NAME_FONT[0], WIDGET_NAME_FONT[1]))
+        widget_name.setStyleSheet('color: #FF6600')
 
         btn_description = QPushButton(f'Подробнее')
         btn_description.setCheckable(True)
@@ -139,8 +143,9 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
             img.resize((int(mi / ma * 200), 200))
         qim = ImageQt(img)
         pixmap = QPixmap.fromImage(qim)
-        pixmap = pixmap.scaledToWidth(IMAGE_SIZE)
-        pixmap = pixmap.scaledToHeight(IMAGE_SIZE)
+        size = self.size()
+        pixmap = pixmap.scaledToWidth((size.height() / 1000) * 250)
+        pixmap = pixmap.scaledToHeight((size.height() / 1000) * 250)
         widget_pic.setPixmap(pixmap)
 
         widget_layout = QHBoxLayout()
@@ -149,6 +154,7 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
         widget_layout.addWidget(btn_description)
         widget_layout.addWidget(btn_add)
         widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
+        widget_layout.setSpacing(7)
         widget.setLayout(widget_layout)
         item.setSizeHint(widget_layout.sizeHint())
         item.setBackground(QColor(ORANGE[0], ORANGE[1], ORANGE[2]))
@@ -200,7 +206,6 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
             self.table_gadgets.setRowHeight(i, height)
         for i in range(len(self.basket_names)):
             self.table_gadgets.setColumnWidth(i, TABLE_BASKET_COLUMN_WIDTH)
-        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITH_ITEMS_STYLE)
         self.print_items_in_basket()
 
     # функция для вывода на экран гаджетов и их характеристик в table_gadgets в корзине сравнения
@@ -216,7 +221,6 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
 
     # функция для очистки корзины сравнения
     def clear_everything_in_basket(self):
-        self.table_gadgets.setStyleSheet(TABLE_BASKET_WITHOUT_ITEMS_STYLE)
         self.table_gadgets.clear()
         self.basket_names.clear()
         self.basket_data.clear()
@@ -286,7 +290,6 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
 
         widget_layout = QHBoxLayout()
         widget_layout.addWidget(btn_more)
-        widget_layout.setSizeConstraint(QLayout.SetMaximumSize)
         widget_layout.addStretch()
         widget_layout.setSpacing(20)
         widget.setLayout(widget_layout)

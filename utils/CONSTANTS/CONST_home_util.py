@@ -41,10 +41,6 @@ ORANGE = 255, 122, 0
 TABLE_BASKET_HEADER = ['Средняя цена', 'Производитель', 'Размер дисплея', 'Ёмкость аккумулятора',
                        'Оперативная память', 'Основная камера', 'Фронтальная камера', 'Матрица экрана']
 
-TABLE_BASKET_WITH_ITEMS_STYLE = '''background-color: white'''
-
-TABLE_BASKET_WITHOUT_ITEMS_STYLE = '''background-color: #353232;'''
-
 TABLE_BASKET_COLUMN_WIDTH = 170
 
 TABLE_BASKET_ROW_HEIGHT_LESS_6 = 85
@@ -57,7 +53,7 @@ ERROR_STYLE = 'color: #FF6600'
 
 REVIEW_STYLE = 'background-color: #353232'
 
-IMAGE_SIZE = 150
+IMAGE_SIZE = 200
 
 WIDGET_NAME_FONT = ('Arial', 15)
 
