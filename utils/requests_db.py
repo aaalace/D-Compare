@@ -177,3 +177,9 @@ def get_reviews():
     cur.execute("""SELECT * FROM reviews""")
     reviews = cur.fetchall()
     return reviews
+
+
+def get_blob_gadgets():
+    cur.execute("""SELECT picture FROM gadgets WHERE id = 1""")
+    blob = cur.fetchall()
+    return blob[0][0]

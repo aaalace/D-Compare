@@ -4,12 +4,9 @@ from utils.CONSTANTS.CONST_filters_util import *
 from utils.requests_db import *
 
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtGui import QImage
 from PyQt5.QtCore import QSize
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import *
-from PyQt5.QtCore import QUrl
-from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkRequest
+from PyQt5.QtGui import QIcon
 
 
 class MyWidgetFilters(QMainWindow, Filters_Form):

@@ -1,6 +1,4 @@
-from PIL.ImageQt import ImageQt
-from PIL import Image
-from PyQt5 import QtCore
+from PyQt5 import QtGui
 
 from templates.forms.main_wind import Ui_MainWindow
 
@@ -15,7 +13,7 @@ from .CONSTANTS.CONST_home_util import *
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, \
     QHBoxLayout, QButtonGroup, QTableWidgetItem, QMessageBox, QLineEdit, QInputDialog
 from PyQt5.QtWidgets import QLabel, QPushButton
-from PyQt5.QtGui import QFont, QColor, QPixmap
+from PyQt5.QtGui import QFont, QColor
 
 
 class MyWidgetMain(QMainWindow, Ui_MainWindow):
@@ -106,9 +104,6 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
             self.list_gadgets.setItemWidget(item, widget)
         self.form_load.hide()
 
-    def resize_img(self):
-        self.create_item_in_list_gadgets()
-
     # функция создания виджета для каждого гаджета в list_gadgets
     def create_item_in_list_gadgets(self, el):
         item = QListWidgetItem()
@@ -131,18 +126,9 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
         btn_add.setStyleSheet(BTN_ADD_STYLE)
 
         widget_pic = QLabel(self)
-        img = Image.open(get_pic())
-        w, h = img.size
-        if w > h:
-            ma = w
-            mi = h
-            img.resize((200, int(mi / ma * 200)))
-        else:
-            ma = h
-            mi = w
-            img.resize((int(mi / ma * 200), 200))
-        qim = ImageQt(img)
-        pixmap = QPixmap.fromImage(qim)
+        image_data = req.get_blob_gadgets()
+        qimg = QtGui.QImage.fromData(image_data)
+        pixmap = QtGui.QPixmap.fromImage(qimg)
         size = self.size()
         pixmap = pixmap.scaledToWidth((size.height() / 1000) * 250)
         pixmap = pixmap.scaledToHeight((size.height() / 1000) * 250)
