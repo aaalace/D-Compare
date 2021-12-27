@@ -1,4 +1,5 @@
 from PyQt5 import QtGui
+from urllib.request import urlopen
 
 from templates.forms.main_wind import Ui_MainWindow
 
@@ -13,7 +14,7 @@ from .CONSTANTS.CONST_home_util import *
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QWidget, QLayout, \
     QHBoxLayout, QButtonGroup, QTableWidgetItem, QMessageBox, QLineEdit, QInputDialog
 from PyQt5.QtWidgets import QLabel, QPushButton
-from PyQt5.QtGui import QFont, QColor
+from PyQt5.QtGui import QFont, QColor, QPixmap
 
 
 class MyWidgetMain(QMainWindow, Ui_MainWindow):
@@ -126,9 +127,10 @@ class MyWidgetMain(QMainWindow, Ui_MainWindow):
         btn_add.setStyleSheet(BTN_ADD_STYLE)
 
         widget_pic = QLabel(self)
-        image_data = req.get_blob_gadgets()
-        qimg = QtGui.QImage.fromData(image_data)
-        pixmap = QtGui.QPixmap.fromImage(qimg)
+        img = req.get_pic_gadgets()
+        data = urlopen(img).read()
+        pixmap = QPixmap()
+        pixmap.loadFromData(data)
         size = self.size()
         pixmap = pixmap.scaledToWidth((size.height() / 1000) * 250)
         pixmap = pixmap.scaledToHeight((size.height() / 1000) * 250)

@@ -1,9 +1,9 @@
-import MySQLdb
+import psycopg2
 
-con = MySQLdb.connect(user='sql11450697',
-                      password='RC3RghhPkm',
-                      host='sql11.freemysqlhosting.net',
-                      database='sql11450697')
+con = psycopg2.connect(user='postgres',
+                      password='Damir1978',
+                      host='127.0.0.1',
+                      database='postgres')
 cur = con.cursor()
 
 
@@ -52,12 +52,12 @@ def get_gadgets(param):
         return gadgets
     if param[0] == 'search':
         param = param[1]
-        sql = f"SELECT * FROM gadgets WHERE name LIKE '%{param}%'"
+        sql = f"SELECT * FROM gadgets WHERE name LIKE '%{param.capitalize()}%'"
         cur.execute(sql)
         gadgets = cur.fetchall()
         return gadgets
     if param[0] == 'filter':
-        cur.execute("""SELECT id, characteristic FROM gadgets""")
+        cur.execute("""SELECT gadget_id, characteristic FROM gadgets""")
         characteristics = cur.fetchall()
         param = param[1]
         indexes = []
@@ -141,7 +141,7 @@ def get_gadgets(param):
 
         gadgets = []
         for el in indexes:
-            cur.execute(f"""SELECT * FROM gadgets WHERE id = {el}""")
+            cur.execute(f"""SELECT * FROM gadgets WHERE gadget_id = {el}""")
             gadget = cur.fetchall()
             gadgets.append(gadget[0])
         return gadgets
@@ -149,26 +149,26 @@ def get_gadgets(param):
 
 # функция отвечающая за сбор информации об устройстве из базы данных
 def get_info_for_basket(ind):
-    cur.execute(f"""SELECT characteristic FROM gadgets WHERE id = {ind}""")
+    cur.execute(f"""SELECT characteristic FROM gadgets WHERE gadget_id = {ind}""")
     data = cur.fetchall()
-    cur.execute(f"""SELECT name FROM gadgets WHERE id = {ind}""")
+    cur.execute(f"""SELECT name FROM gadgets WHERE gadget_id = {ind}""")
     name = cur.fetchall()
     return name[0][0], data[0][0].split(';')
 
 
 # функция отвечающая за сбор обзоров из базы данных
 def get_reviews_by_button(index):
-    cur.execute(f"""SELECT info FROM reviews WHERE id = {index}""")
+    cur.execute(f"""SELECT info FROM reviews WHERE review_id = {index}""")
     info = cur.fetchall()
-    cur.execute(f"""SELECT name FROM reviews WHERE id = {index}""")
+    cur.execute(f"""SELECT name FROM reviews WHERE review_id = {index}""")
     review = cur.fetchall()
     return review[0][0], info[0][0].split(';')
 
 
 def get_readmore_by_button(index):
-    cur.execute(f"""SELECT url FROM gadgets WHERE id = {index}""")
+    cur.execute(f"""SELECT url FROM gadgets WHERE gadget_id = {index}""")
     data = cur.fetchall()
-    cur.execute(f"""SELECT name FROM gadgets WHERE id = {index}""")
+    cur.execute(f"""SELECT name FROM gadgets WHERE gadget_id = {index}""")
     name = cur.fetchall()
     return name[0][0], data[0][0]
 
@@ -179,7 +179,7 @@ def get_reviews():
     return reviews
 
 
-def get_blob_gadgets():
-    cur.execute("""SELECT picture FROM gadgets WHERE id = 1""")
-    blob = cur.fetchall()
-    return blob[0][0]
+def get_pic_gadgets():
+    cur.execute("""SELECT picture FROM gadgets WHERE gadget_id = 1""")
+    pic = cur.fetchall()
+    return pic[0][0]
