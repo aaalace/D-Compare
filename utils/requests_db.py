@@ -35,11 +35,12 @@ def update_password(new, username):
 
 # добавление нового пользователя в БД с проверкой на условия данных
 def register_new_user(username, password):
-    us = cur.execute("""SELECT * FROM users""")
-    print(us)
+    cur.execute("""SELECT * FROM users""")
+    us = cur.fetchall()
     if not bool(username) or not bool(password):
         return [False, 'Оба поля не должны быть пустыми']
-    cur.execute(f"""INSERT users(id, username, password) VALUES({us + 1}, {str(username)}, {str(password)})""")
+    cur.execute(f"""INSERT INTO users 
+                    VALUES ({len(us) + 1}, '{username}', '{password}')""")
     con.commit()
     return [True, 0]
 
@@ -47,7 +48,7 @@ def register_new_user(username, password):
 # функция отвечающая за получение определенного набора гаджетов для главной страницы
 def get_gadgets(param):
     if param[0] == 'all':
-        cur.execute("""SELECT * FROM gadgets""")
+        us = cur.execute("""SELECT * FROM gadgets""")
         gadgets = cur.fetchall()
         return gadgets
     if param[0] == 'search':

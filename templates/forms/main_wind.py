@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setMinimumSize(QtCore.QSize(950, 700))
+        self.tabWidget.setMinimumSize(QtCore.QSize(970, 700))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setStyleStrategy(QtGui.QFont.PreferDefault)
