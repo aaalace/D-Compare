@@ -2,11 +2,11 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QMessageBox
 from PyQt5.QtGui import QPixmap
+from utils.internet_conn_check import *
 
 from templates.forms.login import Login_Form
 from utils.requests_db import *
 from utils.CONSTANTS.CONST_login import *
-from utils.home_util import MyWidgetMain
 from utils.signin_util import MyWidgetSignin
 
 
@@ -41,7 +41,13 @@ class MyWidgetLogin(QMainWindow, Login_Form):
 
     # функция, открывающая главную страницу приложения при успешном входе пользователя в систему
     def open_main(self):
-        MyWidgetMain().showMaximized()
+        arg = check_connection()
+        if arg:
+            from utils.home_util import MyWidgetMain
+            MyWidgetMain().showMaximized()
+        else:
+            from utils.home_util import MyWidgetMain
+            self.print_false_internet_connection()
 
     # окно ошибки, возникающее при неверном вводе данных или отсутствия в системе
     def print_error(self):
@@ -51,6 +57,20 @@ class MyWidgetLogin(QMainWindow, Login_Form):
         error.exec()
         self.line_password.clear()
         self.line_login.clear()
+
+    def print_false_internet_connection(self):
+        error = QMessageBox(self)
+        error.setText(INTERNET_ERROR)
+        error.setStyleSheet(ERROR_STYLE)
+        error.setStandardButtons(QMessageBox.Retry | QMessageBox.Close)
+        error.buttonClicked.connect(self.msgbtn)
+        error.exec()
+
+    def msgbtn(self, i):
+        if i.text() == 'Retry':
+            self.show()
+        if i.text() == 'Close':
+            app.exec()
 
 
 def except_hook(cls, exception, traceback):

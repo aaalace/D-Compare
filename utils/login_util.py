@@ -1,8 +1,8 @@
 from utils.requests_db import *
+from utils.internet_conn_check import *
 from utils.CONSTANTS.CONST_login import *
 
 from templates.forms.login import Login_Form
-from utils.home_util import MyWidgetMain
 from utils.signin_util import MyWidgetSignin
 
 from PyQt5.QtWidgets import QMainWindow
@@ -41,7 +41,13 @@ class MyWidgetLogin(QMainWindow, Login_Form):
     # функция, открывающая главную страницу приложения при успешном входе пользователя в систему
     def open_main(self):
         self.hide()
-        MyWidgetMain().show()
+        arg = check_connection()
+        print(arg)
+        if arg:
+            from utils.home_util import MyWidgetMain
+            MyWidgetMain.show()
+        else:
+            self.print_false_internet_connection()
 
     # окно ошибки, возникающее при неверном вводе данных или отсутствия в системе
     def print_error(self):
@@ -51,3 +57,9 @@ class MyWidgetLogin(QMainWindow, Login_Form):
         error.exec()
         self.line_password.clear()
         self.line_login.clear()
+
+    def print_false_internet_connection(self):
+        error = QMessageBox(self)
+        error.setText(INTERNET_ERROR)
+        error.setStyleSheet(ERROR_STYLE)
+        error.exec()

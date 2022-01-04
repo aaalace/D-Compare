@@ -1,4 +1,3 @@
-from PyQt5 import QtGui
 from urllib.request import urlopen
 
 from templates.forms.main_wind import Ui_MainWindow
